@@ -45,6 +45,25 @@ log "Starte n8n Installation auf Ubuntu Server..."
 log "Domain: $DOMAIN_NAME"
 log "Email: $EMAIL"
 
+# n8n Encryption Key verwalten
+N8N_KEY_DIR="/var/n8n"
+N8N_KEY_FILE="$N8N_KEY_DIR/encryption.key"
+
+log "Konfiguriere n8n Encryption Key..."
+mkdir -p "$N8N_KEY_DIR"
+chmod 700 "$N8N_KEY_DIR"
+
+if [[ -f "$N8N_KEY_FILE" ]]; then
+    log "Existierender Encryption Key gefunden - wird wiederverwendet"
+    N8N_ENCRYPTION_KEY=$(cat "$N8N_KEY_FILE")
+else
+    log "Generiere neuen Encryption Key..."
+    N8N_ENCRYPTION_KEY=$(openssl rand -base64 32)
+    echo "$N8N_ENCRYPTION_KEY" > "$N8N_KEY_FILE"
+    chmod 600 "$N8N_KEY_FILE"
+    log "Encryption Key wurde in $N8N_KEY_FILE gespeichert"
+fi
+
 # System Update
 log "Aktualisiere System..."
 apt update && apt upgrade -y
@@ -126,7 +145,7 @@ DB_POSTGRESDB_USER=$POSTGRES_USER
 DB_POSTGRESDB_PASSWORD=$POSTGRES_PASSWORD
 
 # Sicherheit
-N8N_ENCRYPTION_KEY=$(openssl rand -base64 32)
+N8N_ENCRYPTION_KEY=$N8N_ENCRYPTION_KEY
 
 # Logging
 N8N_LOG_LEVEL=info
@@ -313,5 +332,7 @@ echo -e "${YELLOW}Hinweis:${NC} Beim ersten Zugriff müssen Sie einen Admin-Benu
 
 # Passwort in separater Datei speichern
 echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" > /root/n8n-db-credentials.txt
+echo "N8N_ENCRYPTION_KEY_FILE=$N8N_KEY_FILE" >> /root/n8n-db-credentials.txt
 chmod 600 /root/n8n-db-credentials.txt
-echo -e "${YELLOW}Datenbank-Passwort wurde in /root/n8n-db-credentials.txt gespeichert${NC}"
+echo -e "${YELLOW}Datenbank-Passwort und Encryption Key Pfad wurden in /root/n8n-db-credentials.txt gespeichert${NC}"
+echo -e "${YELLOW}Encryption Key wurde dauerhaft in $N8N_KEY_FILE gespeichert${NC}"

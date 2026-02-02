@@ -52,11 +52,19 @@ cp /etc/nginx/sites-available/n8n "$BACKUP_DIR/nginx_n8n_$DATE.conf"
 # Systemd Service backup
 cp /etc/systemd/system/n8n.service "$BACKUP_DIR/n8n_service_$DATE.service"
 
+# Encryption Key backup
+if [[ -f "/var/n8n/encryption.key" ]]; then
+    log "Sichere Encryption Key..."
+    cp /var/n8n/encryption.key "$BACKUP_DIR/n8n_encryption_$DATE.key"
+    chmod 600 "$BACKUP_DIR/n8n_encryption_$DATE.key"
+fi
+
 # Alte Backups löschen (älter als 30 Tage)
 find "$BACKUP_DIR" -name "*.sql" -mtime +30 -delete
 find "$BACKUP_DIR" -name "*.tar.gz" -mtime +30 -delete
 find "$BACKUP_DIR" -name "*.conf" -mtime +30 -delete
 find "$BACKUP_DIR" -name "*.service" -mtime +30 -delete
+find "$BACKUP_DIR" -name "*.key" -mtime +30 -delete
 
 log "Backup abgeschlossen!"
 log "Backup-Dateien:"

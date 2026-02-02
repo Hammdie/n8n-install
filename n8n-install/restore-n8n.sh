@@ -51,6 +51,7 @@ BACKUP_DATE="$1"
 # Backup-Dateien prüfen
 DB_BACKUP="$BACKUP_DIR/n8n_db_$BACKUP_DATE.sql"
 CONFIG_BACKUP="$BACKUP_DIR/n8n_config_$BACKUP_DATE.tar.gz"
+ENCRYPTION_BACKUP="$BACKUP_DIR/n8n_encryption_$BACKUP_DATE.key"
 
 if [[ ! -f "$DB_BACKUP" ]]; then
     error "Datenbank-Backup nicht gefunden: $DB_BACKUP"
@@ -85,6 +86,17 @@ log "Stelle Konfiguration wieder her..."
 rm -rf "$N8N_DIR"/*
 tar -xzf "$CONFIG_BACKUP" -C "$N8N_DIR"
 chown -R "$N8N_USER:$N8N_USER" "$N8N_DIR"
+
+# Encryption Key wiederherstellen
+if [[ -f "$ENCRYPTION_BACKUP" ]]; then
+    log "Stelle Encryption Key wieder her..."
+    mkdir -p /var/n8n
+    cp "$ENCRYPTION_BACKUP" /var/n8n/encryption.key
+    chmod 600 /var/n8n/encryption.key
+    chmod 700 /var/n8n
+else
+    warning "Kein Encryption Key Backup gefunden - Key wird regeneriert"
+fi
 
 # n8n starten
 log "Starte n8n Service..."
