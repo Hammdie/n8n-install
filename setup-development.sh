@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # n8n Development Environment Setup
-# Erstellt lokale Entwicklungsumgebung mit Git-Integration
+# Creates local development environment with Git integration
 
 set -e
 
-# Farben für Output
+# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -29,21 +29,21 @@ info() {
     echo -e "${BLUE}[INFO] $1${NC}"
 }
 
-# Parameter prüfen
+# Check parameters
 if [ "$#" -lt 2 ]; then
-    error "Verwendung: $0 <workspace-name> <environment> [git-repo-url]"
+    error "Usage: $0 <workspace-name> <environment> [git-repo-url]"
 fi
 
 WORKSPACE_NAME="$1"
 ENVIRONMENT="$2"
 GIT_REPO_URL="$3"
 
-# Validiere Environment
+# Validate environment
 case $ENVIRONMENT in
     development|preproduction|production)
         ;;
     *)
-        error "Ungültiges Environment. Verwende: development, preproduction, production"
+        error "Invalid environment. Use: development, preproduction, production"
         ;;
 esac
 DEV_BASE_DIR="$HOME/n8n-development"
@@ -61,23 +61,23 @@ if [ -n "$GIT_REPO_URL" ]; then
 fi
 echo ""
 
-# Entwicklungsverzeichnis erstellen
-log "Erstelle Entwicklungsverzeichnis..."
+# Create development directory
+log "Creating development directory..."
 mkdir -p "$WORKSPACE_DIR"
 cd "$WORKSPACE_DIR"
 
-# Git Repository initialisieren oder klonen
+# Initialize or clone Git repository
 if [ -n "$GIT_REPO_URL" ]; then
-    log "Klone Git Repository..."
-    git clone "$GIT_REPO_URL" "n8n-workflows" || error "Git Clone fehlgeschlagen"
+    log "Cloning Git repository..."
+    git clone "$GIT_REPO_URL" "n8n-workflows" || error "Git clone failed"
     cd "n8n-workflows"
 else
-    log "Initialisiere lokales Git Repository..."
+    log "Initializing local Git repository..."
     mkdir -p "n8n-workflows"
     cd "n8n-workflows"
     git init
     
-    # .gitignore erstellen
+    # Create .gitignore
     cat > .gitignore << 'EOF'
 # n8n Development
 .env
@@ -109,10 +109,10 @@ EOF
     git commit -m "Initial commit: Add .gitignore"
 fi
 
-# Verzeichnisstruktur erstellen
-log "Erstelle Projektstruktur für $ENVIRONMENT..."
+# Create directory structure
+log "Creating project structure for $ENVIRONMENT..."
 
-# Environment-spezifische Verzeichnisse
+# Environment-specific directories
 mkdir -p workflows/{development,preproduction,production}
 mkdir -p credentials/{development,preproduction,production}
 mkdir -p ansible/{inventories/{development,preproduction,production},playbooks,roles}
@@ -120,7 +120,7 @@ mkdir -p scripts/{export,import,deploy}
 mkdir -p docs
 mkdir -p environments/$ENVIRONMENT
 
-# Development-spezifische Dateien erstellen
+# Create development-specific files
 cat > workflows/README.md << 'EOF'
 # n8n Workflows
 
@@ -260,8 +260,8 @@ N8N_DISABLE_UI=false
 N8N_DIAGNOSTICS_ENABLED=false
 EOF
 
-# Ansible Inventories erstellen
-log "Erstelle Ansible Inventories..."
+# Create Ansible Inventories
+log "Creating Ansible inventories..."
 mkdir -p ansible/inventories/{development,staging,production}
 
 # Development Inventory
@@ -320,7 +320,7 @@ all:
           n8n_environment: production
 EOF
 
-# Ansible Konfiguration
+# Ansible configuration
 cat > ansible/ansible.cfg << 'EOF'
 [defaults]
 host_key_checking = False
@@ -341,22 +341,22 @@ become_user = root
 become_ask_pass = False
 EOF
 
-log "$ENVIRONMENT Environment erstellt!"
-info "Nächste Schritte:"
+log "$ENVIRONMENT Environment created!"
+info "Next steps:"
 echo ""
-echo "1. Wechseln in Workspace:"
+echo "1. Change to workspace:"
 echo "   cd $WORKSPACE_DIR/n8n-workflows"
 echo ""
-echo "2. Environment starten:"
+echo "2. Start environment:"
 echo "   docker-compose -f docker-compose.$ENVIRONMENT.yml up -d"
 echo ""
-echo "3. n8n öffnen:"
+echo "3. Open n8n:"
 echo "   http://localhost:5678"
 echo ""
-echo "4. Multi-Environment Manager verwenden:"
+echo "4. Use multi-environment manager:"
 echo "   ../manage-environments.sh"
 echo ""
-echo "5. Server-spezifische Deployments:"
+echo "5. Server-specific deployments:"
 echo "   ./export-workflows.sh $ENVIRONMENT"
 echo "   ./import-workflows.sh $ENVIRONMENT <server>"
 echo ""

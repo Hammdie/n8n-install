@@ -4,15 +4,15 @@
 # Author: Automatically generated
 # Date: $(date)
 
-set -e  # Exit bei Fehlern
+set -e  # Exit on errors
 
-# Farben für Output
+# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Logging-Funktion
+# Logging function
 log() {
     echo -e "${GREEN}[$(date +'%Y-%m-%d %H:%M:%S')] $1${NC}"
 }
@@ -83,7 +83,7 @@ else
     install_native
 fi
 
-# Gemeinsame Abschlusskonfiguration
+# Common post-installation configuration
 post_install_config
 
 # Docker Compose Installation Function
@@ -120,91 +120,91 @@ install_docker_compose() {
     apt update
     apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
-    # Docker Service starten
+    # Start Docker service
     systemctl start docker
     systemctl enable docker
 
-    # n8n Encryption Key verwalten
+    # Manage n8n Encryption Key
     N8N_KEY_DIR="/var/n8n"
     N8N_KEY_FILE="$N8N_KEY_DIR/encryption.key"
 
-    log "Konfiguriere n8n Encryption Key..."
+    log "Configuring n8n encryption key..."
     mkdir -p "$N8N_KEY_DIR"
     chmod 700 "$N8N_KEY_DIR"
 
     if [[ -f "$N8N_KEY_FILE" ]]; then
-        log "Existierender Encryption Key gefunden - wird wiederverwendet"
+        log "Existing encryption key found - will be reused"
         N8N_ENCRYPTION_KEY=$(cat "$N8N_KEY_FILE")
     else
-        log "Generiere neuen Encryption Key..."
+        log "Generating new encryption key..."
         N8N_ENCRYPTION_KEY=$(openssl rand -base64 32)
         echo "$N8N_ENCRYPTION_KEY" > "$N8N_KEY_FILE"
         chmod 600 "$N8N_KEY_FILE"
-        log "Encryption Key wurde in $N8N_KEY_FILE gespeichert"
+        log "Encryption key saved in $N8N_KEY_FILE"
     fi
 
-    # PostgreSQL Passwort generieren
+    # Generate PostgreSQL password
     POSTGRES_PASSWORD=$(openssl rand -base64 32)
 
-    # n8n Arbeitsverzeichnis erstellen
+    # Create n8n working directory
     N8N_DOCKER_DIR="/opt/n8n"
     mkdir -p "$N8N_DOCKER_DIR"
     chmod 755 "$N8N_DOCKER_DIR"
 
-    # Docker Compose Konfiguration erstellen
-    log "Erstelle Docker Compose Konfiguration..."
+    # Create Docker Compose configuration
+    log "Creating Docker Compose configuration..."
     create_docker_compose
 
-    # nginx Konfiguration für Docker
+    # nginx configuration for Docker
     configure_nginx_docker
 
-    # Docker Services starten
-    log "Starte Docker Services..."
+    # Start Docker services
+    log "Starting Docker services..."
     cd "$N8N_DOCKER_DIR"
     docker compose up -d
 
-    # Warten bis Services bereit sind
-    log "Warte auf Services..."
+    # Wait until services are ready
+    log "Waiting for services..."
     sleep 30
 
-    # Services prüfen
+    # Check services
     if docker compose ps | grep -q "Up"; then
-        log "Docker Services erfolgreich gestartet!"
+        log "Docker services started successfully!"
     else
-        error "Fehler beim Starten der Docker Services"
+        error "Error starting Docker services"
     fi
 }
 
-# Native Installation Funktion
+# Native Installation Function
 install_native() {
 
-    log "Starte native n8n Installation..."
+    log "Starting native n8n installation..."
 
-    # n8n Encryption Key verwalten
+    # Manage n8n Encryption Key
     N8N_KEY_DIR="/var/n8n"
     N8N_KEY_FILE="$N8N_KEY_DIR/encryption.key"
 
-    log "Konfiguriere n8n Encryption Key..."
+    log "Configuring n8n encryption key..."
     mkdir -p "$N8N_KEY_DIR"
     chmod 700 "$N8N_KEY_DIR"
 
     if [[ -f "$N8N_KEY_FILE" ]]; then
-        log "Existierender Encryption Key gefunden - wird wiederverwendet"
+        log "Existing encryption key found - will be reused"
         N8N_ENCRYPTION_KEY=$(cat "$N8N_KEY_FILE")
     else
-        log "Generiere neuen Encryption Key..."
+        log "Generating new encryption key..."
         N8N_ENCRYPTION_KEY=$(openssl rand -base64 32)
         echo "$N8N_ENCRYPTION_KEY" > "$N8N_KEY_FILE"
         chmod 600 "$N8N_KEY_FILE"
-        log "Encryption Key wurde in $N8N_KEY_FILE gespeichert"
+        log "Encryption key saved in $N8N_KEY_FILE"
     fi
 
-# System Update
-log "Aktualisiere System..."
+# System update
+log "Updating system..."
 apt update && apt upgrade -y
 
-# Installiere grundlegende Pakete
-log "Installiere grundlegende Pakete..."
+# Install basic packages
+log "Installing basic packages..."
 apt install -y \
     curl \
     wget \
@@ -219,21 +219,21 @@ apt install -y \
     certbot \
     python3-certbot-nginx
 
-# Node.js 18.x installieren
-log "Installiere Node.js 18.x..."
+# Install Node.js 18.x
+log "Installing Node.js 18.x..."
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt install -y nodejs
 
-# PostgreSQL installieren
-log "Installiere PostgreSQL..."
+# Install PostgreSQL
+log "Installing PostgreSQL..."
 apt install -y postgresql postgresql-contrib
 
-# PostgreSQL konfigurieren
-log "Konfiguriere PostgreSQL..."
+# Configure PostgreSQL
+log "Configuring PostgreSQL..."
 systemctl start postgresql
 systemctl enable postgresql
 
-# Datenbank und Benutzer erstellen
+# Create database and user
 sudo -u postgres psql << EOF
 CREATE DATABASE $POSTGRES_DB;
 CREATE USER $POSTGRES_USER WITH ENCRYPTED PASSWORD '$POSTGRES_PASSWORD';
@@ -242,8 +242,8 @@ ALTER USER $POSTGRES_USER CREATEDB;
 \q
 EOF
 
-# n8n Benutzer erstellen
-log "Erstelle n8n Benutzer..."
+# Create n8n user
+log "Creating n8n user..."
 if ! id "$N8N_USER" &>/dev/null; then
     useradd -m -s /bin/bash "$N8N_USER"
     usermod -aG sudo "$N8N_USER"

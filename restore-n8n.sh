@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # n8n Restore Script
-# Stellt n8n aus einem Backup wieder her
+# Restores n8n from a backup
 
 set -e
 
@@ -31,52 +31,52 @@ warning() {
     echo -e "${YELLOW}[WARNING] $1${NC}"
 }
 
-# Root-Rechte prüfen
+# Check root privileges
 if [[ $EUID -ne 0 ]]; then
-   error "Dieses Script muss als root ausgeführt werden"
+   error "This script must be run as root"
 fi
 
-# Parameter prüfen
+# Check parameters
 if [[ -z "$1" ]]; then
-    echo "Verfügbare Backups:"
-    ls -la "$BACKUP_DIR"/*.sql 2>/dev/null || error "Keine Backups gefunden"
+    echo "Available backups:"
+    ls -la "$BACKUP_DIR"/*.sql 2>/dev/null || error "No backups found"
     echo ""
-    echo "Verwendung: $0 <backup-datum>"
-    echo "Beispiel: $0 20240202_143000"
+    echo "Usage: $0 <backup-date>"
+    echo "Example: $0 20240202_143000"
     exit 1
 fi
 
 BACKUP_DATE="$1"
 
-# Backup-Dateien prüfen
+# Check backup files
 DB_BACKUP="$BACKUP_DIR/n8n_db_$BACKUP_DATE.sql"
 CONFIG_BACKUP="$BACKUP_DIR/n8n_config_$BACKUP_DATE.tar.gz"
 ENCRYPTION_BACKUP="$BACKUP_DIR/n8n_encryption_$BACKUP_DATE.key"
 
 if [[ ! -f "$DB_BACKUP" ]]; then
-    error "Datenbank-Backup nicht gefunden: $DB_BACKUP"
+    error "Database backup not found: $DB_BACKUP"
 fi
 
 if [[ ! -f "$CONFIG_BACKUP" ]]; then
-    error "Konfiguration-Backup nicht gefunden: $CONFIG_BACKUP"
+    error "Configuration backup not found: $CONFIG_BACKUP"
 fi
 
-log "Starte n8n Restore für Backup vom $BACKUP_DATE..."
+log "Starting n8n restore for backup from $BACKUP_DATE..."
 
-# Sicherheitsabfrage
-warning "ACHTUNG: Dieser Vorgang überschreibt die aktuelle n8n Installation!"
-read -p "Möchten Sie fortfahren? (ja/nein): " response
-if [[ "$response" != "ja" ]]; then
-    echo "Restore abgebrochen."
+# Safety confirmation
+warning "WARNING: This operation will overwrite the current n8n installation!"
+read -p "Do you want to continue? (yes/no): " response
+if [[ "$response" != "yes" ]]; then
+    echo "Restore cancelled."
     exit 0
 fi
 
-# n8n stoppen
-log "Stoppe n8n Service..."
+# Stop n8n
+log "Stopping n8n service..."
 systemctl stop n8n
 
-# Datenbank wiederherstellen
-log "Stelle Datenbank wieder her..."
+# Restore database
+log "Restoring database..."
 sudo -u postgres dropdb --if-exists "$POSTGRES_DB"
 sudo -u postgres createdb "$POSTGRES_DB"
 sudo -u postgres psql -d "$POSTGRES_DB" < "$DB_BACKUP"

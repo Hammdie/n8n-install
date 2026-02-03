@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # n8n Backup Script
-# Erstellt Backups der n8n Datenbank und Konfiguration
+# Creates backups of n8n database and configuration
 
 set -e
 
@@ -27,45 +27,45 @@ error() {
     exit 1
 }
 
-# Root-Rechte prüfen
+# Check root privileges
 if [[ $EUID -ne 0 ]]; then
-   error "Dieses Script muss als root ausgeführt werden"
+   error "This script must be run as root"
 fi
 
-# Backup-Verzeichnis erstellen
+# Create backup directory
 mkdir -p "$BACKUP_DIR"
 
-log "Starte n8n Backup..."
+log "Starting n8n backup..."
 
 # PostgreSQL Backup
-log "Erstelle Datenbank-Backup..."
+log "Creating database backup..."
 sudo -u postgres pg_dump "$POSTGRES_DB" > "$BACKUP_DIR/n8n_db_$DATE.sql"
 
-# n8n Konfiguration und Daten backup
-log "Erstelle Konfiguration-Backup..."
+# n8n configuration and data backup
+log "Creating configuration backup..."
 tar -czf "$BACKUP_DIR/n8n_config_$DATE.tar.gz" -C "$N8N_DIR" .
 
-# Nginx Konfiguration backup
-log "Erstelle Nginx-Konfiguration-Backup..."
+# Nginx configuration backup
+log "Creating nginx configuration backup..."
 cp /etc/nginx/sites-available/n8n "$BACKUP_DIR/nginx_n8n_$DATE.conf"
 
-# Systemd Service backup
+# Systemd service backup
 cp /etc/systemd/system/n8n.service "$BACKUP_DIR/n8n_service_$DATE.service"
 
-# Encryption Key backup
+# Encryption key backup
 if [[ -f "/var/n8n/encryption.key" ]]; then
-    log "Sichere Encryption Key..."
+    log "Backing up encryption key..."
     cp /var/n8n/encryption.key "$BACKUP_DIR/n8n_encryption_$DATE.key"
     chmod 600 "$BACKUP_DIR/n8n_encryption_$DATE.key"
 fi
 
-# Alte Backups löschen (älter als 30 Tage)
+# Delete old backups (older than 30 days)
 find "$BACKUP_DIR" -name "*.sql" -mtime +30 -delete
 find "$BACKUP_DIR" -name "*.tar.gz" -mtime +30 -delete
 find "$BACKUP_DIR" -name "*.conf" -mtime +30 -delete
 find "$BACKUP_DIR" -name "*.service" -mtime +30 -delete
 find "$BACKUP_DIR" -name "*.key" -mtime +30 -delete
 
-log "Backup abgeschlossen!"
-log "Backup-Dateien:"
+log "Backup completed!"
+log "Backup files:"
 ls -la "$BACKUP_DIR"/*_$DATE.*
