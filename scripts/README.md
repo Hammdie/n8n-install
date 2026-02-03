@@ -1,8 +1,30 @@
-# n8n Installation Scripts
+# n8n Installation & Workflow Management Scripts
 
-This directory contains all management and deployment scripts for the n8n installation suite.
+This directory contains all management scripts for the n8n installation suite including specialized workflow import/export tools.
 
 ## Directory Structure
+
+### 🔄 **Workflow Management Scripts** *(New Addition)*
+Specialized scripts for n8n workflow import/export operations:
+- `clean-api-import.sh` - **Main script** for API-based workflow import with JSON cleaning
+- `api-import.sh` - Basic API import script
+- `sqlite-import.sh` - Direct SQLite database import
+- `update-workflows.py` - **Python-based update system** with ID mapping
+- `update-workflows.sh` - Bash alternative for updates
+
+**🎯 Workflow Usage:**
+```bash
+cd /Users/dietmar.hamm/PycharmProjects/n8n-install/development
+
+# Import from production
+../scripts/clean-api-import.sh 360Group
+
+# Update workflows after changes
+../scripts/update-workflows.py 360Group interactive
+
+# Show ID mappings
+../scripts/update-workflows.py 360Group list
+```
 
 ### 🐳 [docker/](docker/)
 Docker-specific management scripts:
