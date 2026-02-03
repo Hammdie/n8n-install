@@ -1,9 +1,9 @@
 # n8n Professional Installation Suite
 
-![n8n](https://img.shields.io/badge/n8n-Professional%20Suite-FF6D5A?style=for-the-badge&logo=n8n)
-![Ubuntu](https://img.shields.io/badge/Ubuntu%20Server-22.04%20LTS-E95420?style=for-the-badge&logo=ubuntu)
-![Docker](https://img.shields.io/badge/Docker-Support-2496ED?style=for-the-badge&logo=docker)
-![Ansible](https://img.shields.io/badge/Ansible-Automation-EE0000?style=for-the-badge&logo=ansible)
+[![n8n](https://img.shields.io/badge/n8n-Professional%20Suite-FF6D5A?style=for-the-badge&logo=n8n)](https://n8n.io/)
+[![Ubuntu](https://img.shields.io/badge/Ubuntu%20Server-22.04%20LTS-E95420?style=for-the-badge&logo=ubuntu)](https://ubuntu.com/server)
+[![Docker](https://img.shields.io/badge/Docker-Support-2496ED?style=for-the-badge&logo=docker)](https://docs.docker.com/)
+[![Ansible](https://img.shields.io/badge/Ansible-Automation-EE0000?style=for-the-badge&logo=ansible)](https://docs.ansible.com/)
 
 A comprehensive, production-ready n8n installation and management suite designed for professional multi-environment deployments.
 
