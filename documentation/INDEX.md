@@ -65,7 +65,7 @@
 |--------|---------|-----------|---------------|
 | **[backup-n8n.sh](backup-n8n.sh)** | Backup system | `n8n-backup` | **[→ Backup Guide](README.md#-backup--maintenance)** |
 | **[restore-n8n.sh](restore-n8n.sh)** | Restore system | `n8n-restore` | **[→ Restore Guide](README.md#-backup--maintenance)** |
-| **[update-n8n.sh](update-n8n.sh)** | Update management | `n8n-update` | **[→ Update Guide](README.md#-updates--maintenance)** |
+| **[update-n8n.sh](../scripts/host/update-n8n.sh)** | Update management | `n8n-update` | **[→ Update Guide](README.md#-updates--maintenance)** |
 
 ---
 
@@ -136,7 +136,7 @@
 ### 🚀 **Performance**
 - **[Docker vs Native](README.md#%EF%B8%8F-installation-options-during-setup)** - Performance comparison
 - **[System Monitoring](n8n-menu.sh)** - Resource monitoring
-- **[Update Management](update-n8n.sh)** - Performance updates
+- **[Update Management](../scripts/host/update-n8n.sh)** - Performance updates
 
 ### 🔧 **Administration**
 - **[Service Management](README.md#-service-commands)** - Start/Stop/Restart

@@ -36,6 +36,7 @@ Central management interfaces:
 Workflow and data management:
 - `export-workflows.sh` - Export workflows and credentials
 - `import-workflows.sh` - Import workflows via Ansible
+- `extract-to-development.sh` - Extract all workflows/credentials to development structure
 
 ## Quick Start
 

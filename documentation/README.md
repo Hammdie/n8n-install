@@ -57,7 +57,7 @@
 |--------|----------|----------|
 | **[💾 Backup](backup-n8n.sh)** | Create n8n Backup | `n8n-backup` |
 | **[🔄 Restore](restore-n8n.sh)** | Restore Backup | `n8n-restore` |
-| **[🔄 Update](update-n8n.sh)** | Update n8n | `n8n-update` |
+| **[🔄 Update](../scripts/host/update-n8n.sh)** | Update n8n | `n8n-update` |
 
 ---
 
@@ -86,7 +86,7 @@
 ### 💾 **Backup & Maintenance**
 - **[backup-n8n.sh](backup-n8n.sh)** - [Backup system](backup-n8n.sh#L40) with [encryption key support](backup-n8n.sh#L85)
 - **[restore-n8n.sh](restore-n8n.sh)** - [Restore system](restore-n8n.sh#L50) for [complete recovery](restore-n8n.sh#L95)
-- **[update-n8n.sh](update-n8n.sh)** - [Update management](update-n8n.sh#L25) for n8n versions
+- **[update-n8n.sh](../scripts/host/update-n8n.sh)** - [Update management](../scripts/host/update-n8n.sh#L25) for n8n versions
 
 ---
 
@@ -214,9 +214,9 @@ n8n-vault       # [Vault management](manage-vault.sh)
 #### Native Installation
 ```bash
 # Update n8n to latest version
-sudo ./update-n8n.sh
+sudo ./scripts/host/update-n8n.sh
 ```
-📍 **[→ Update Script Details](update-n8n.sh)**
+📍 **[→ Update Script Details](../scripts/host/update-n8n.sh)**
 
 #### Docker Installation  
 ```bash
