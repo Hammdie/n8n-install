@@ -1,159 +1,159 @@
 # 🚀 n8n Multi-Environment Development & Deployment Suite
 
-## 📋 Übersicht
+## 📋 Overview
 
-Diese Suite ermöglicht eine vollständige **lokale n8n-Entwicklung** mit **Ansible-basiertem Deployment** auf verschiedene Umgebungen mit getrennten Server-Listen.
+This suite enables complete **local n8n development** with **Ansible-based deployment** to different environments with separated server lists.
 
-### 🎯 Hauptziele
-- **Lokale Entwicklung** mit Git-Versionierung
-- **Getrennte Umgebungen** (Development, Pre-Production, Production)
-- **Ansible-Pipeline** für automatisierte Deployments
-- **Sichere Credential-Verwaltung** mit Vault
-- **Flexible Installation** (Native oder Docker)
+### 🎯 Main Goals
+- **Local development** with Git versioning
+- **Separated environments** (Development, Pre-Production, Production)
+- **Ansible pipeline** for automated deployments
+- **Secure credential management** with Vault
+- **Flexible installation** (Native or Docker)
 
-## 🏗️ Systemarchitektur
+## 🏗️ System Architecture
 
-### 📁 Verzeichnisstruktur
+### 📁 Directory Structure
 ```
 n8n-install/
 ├── 🛠️ INSTALLATION SCRIPTS
-│   ├── install-n8n.sh              # Haupt-Installationsskript (Native/Docker)
-│   ├── setup-ssh-user.sh           # SSH-Zugang für Management
-│   └── setup-development.sh        # Entwicklungsumgebung Setup
+│   ├── install-n8n.sh              # Main installation script (Native/Docker)
+│   ├── setup-ssh-user.sh           # SSH access for management
+│   └── setup-development.sh        # Development environment setup
 │
 ├── 🌐 ENVIRONMENT MANAGEMENT  
-│   ├── manage-environments.sh       # Multi-Environment Manager
-│   ├── server-config.sh            # Server-Listen Konfiguration
-│   └── manage-vault.sh             # Ansible Vault Management
+│   ├── manage-environments.sh       # Multi-environment manager
+│   ├── server-config.sh            # Server list configuration
+│   └── manage-vault.sh             # Ansible Vault management
 │
 ├── 📦 WORKFLOW MANAGEMENT
-│   ├── export-workflows.sh         # n8n → Git Export
-│   ├── import-workflows.sh         # Git → n8n Import
-│   └── manage-docker.sh            # Docker Container Verwaltung
+│   ├── export-workflows.sh         # n8n → Git export
+│   ├── import-workflows.sh         # Git → n8n import
+│   └── manage-docker.sh            # Docker container management
 │
 ├── 🔧 UTILITIES
-│   ├── n8n-menu.sh                 # Hauptverwaltungsmenü
-│   ├── manage-domains.sh           # Domain & SSL Management
-│   ├── backup-n8n.sh              # Backup-System
-│   └── restore-n8n.sh             # Restore-System
+│   ├── n8n-menu.sh                 # Main management menu
+│   ├── manage-domains.sh           # Domain & SSL management
+│   ├── backup-n8n.sh              # Backup system
+│   └── restore-n8n.sh             # Restore system
 │
 └── 📚 DOCUMENTATION
-    ├── README.md                   # Hauptdokumentation
-    ├── FEATURES.md                 # Feature-Übersicht
-    └── MULTI-ENVIRONMENT.md        # Diese Datei
+    ├── README.md                   # Main documentation
+    ├── FEATURES.md                 # Feature overview
+    └── MULTI-ENVIRONMENT.md        # This file
 ```
 
-## 🌍 Umgebungen
+## 🌍 Environments
 
 ### 1. 🛠️ Development Environment
-**Zweck**: Lokale Entwicklung und erste Tests
+**Purpose**: Local development and initial testing
 
-**Server-Liste**:
+**Server List**:
 - `local` → localhost (Docker/Native)
-- `dev-vm` → dev.internal.com (Interne VM)
+- `dev-vm` → dev.internal.com (Internal VM)
 - `dev-docker` → dev-docker.internal.com (Docker Host)
 
-**Eigenschaften**:
-- Unverschlüsselte Credentials
-- Basis-Authentifizierung (admin/admin123)
-- Einfache Konfiguration
-- Direkter Git-Zugriff
+**Properties**:
+- Unencrypted credentials
+- Basic authentication (admin/admin123)
+- Simple configuration
+- Direct Git access
 
 ### 2. 🧪 Pre-Production Environment  
-**Zweck**: Staging, Testing, QA, Demo
+**Purpose**: Staging, testing, QA, demo
 
-**Server-Liste**:
+**Server List**:
 - `staging-01` → staging-01.example.com
 - `staging-02` → staging-02.example.com  
 - `test-cluster` → test-cluster.example.com
 - `qa-server` → qa.example.com
 - `demo-server` → demo.example.com
 
-**Eigenschaften**:
-- Verschlüsselte Credentials (Ansible Vault)
-- SSL-Zertifikate erforderlich
-- Backup-System aktiviert
-- Production-ähnliche Konfiguration
+**Properties**:
+- Encrypted credentials (Ansible Vault)
+- SSL certificates required
+- Backup system activated
+- Production-like configuration
 
 ### 3. 🏭 Production Environment
-**Zweck**: Live-System mit höchster Sicherheit
+**Purpose**: Live system with highest security
 
-**Server-Liste**:
+**Server List**:
 - `prod-01` → prod-01.example.com (Primary)
 - `prod-02` → prod-02.example.com (Secondary) 
 - `prod-03` → prod-03.example.com (Tertiary)
 - `prod-backup` → backup.example.com (Backup)
 - `prod-dr` → dr.example.com (Disaster Recovery)
 
-**Eigenschaften**:
-- Ultra-sichere verschlüsselte Credentials
-- SSL/TLS-Verschlüsselung erforderlich
-- Automatisches Backup-System
-- Monitoring & Alerting
-- Security Hardening aktiviert
+**Properties**:
+- Ultra-secure encrypted credentials
+- SSL/TLS encryption required
+- Automatic backup system
+- Monitoring & alerting
+- Security hardening enabled
 
-## 🚀 Workflow: Entwicklung → Deployment
+## 🚀 Workflow: Development → Deployment
 
-### 1. Lokale Entwicklung starten
+### 1. Start Local Development
 ```bash
-# Development Environment erstellen
+# Create development environment
 ./setup-development.sh my-project development
 
-# Wechsel in Workspace
+# Switch to workspace
 cd ~/n8n-development/my-project/n8n-workflows
 
-# Lokales n8n starten  
+# Start local n8n  
 docker-compose -f docker-compose.development.yml up -d
 
-# n8n öffnen: http://localhost:5678
+# Open n8n: http://localhost:5678
 ```
 
-### 2. Workflows entwickeln
-- n8n UI für Workflow-Erstellung verwenden
-- Workflows in lokalem n8n testen
-- Credentials als Templates anlegen
+### 2. Develop Workflows
+- Use n8n UI for workflow creation
+- Test workflows in local n8n
+- Create credentials as templates
 
-### 3. Export in Git
+### 3. Export to Git
 ```bash
-# Workflows exportieren
+# Export workflows
 ../export-workflows.sh development
 
-# Git Status prüfen
+# Check Git status
 git status
 
-# Änderungen committen
+# Commit changes
 git add .
 git commit -m "Add new customer onboarding workflow"
 git push
 ```
 
-### 4. Deployment auf Staging
+### 4. Deploy to Staging
 ```bash
-# Einzelserver Deployment
+# Single server deployment
 ../import-workflows.sh preproduction staging-01
 
-# Oder Multi-Environment Manager
+# Or multi-environment manager
 ../manage-environments.sh
-# → [2] Pre-Production → [3] Workflows importieren
+# → [2] Pre-Production → [3] Import workflows
 ```
 
 ### 5. Production Deployment
 ```bash
-# Mit Sicherheitsabfrage
+# With security confirmation
 ../import-workflows.sh production prod-01 --workflows-only
 
-# Oder Bulk-Deployment auf alle Production-Server
+# Or bulk deployment to all production servers
 ../manage-environments.sh
-# → [6] Bulk-Deployment → [3] Production Import
+# → [6] Bulk Deployment → [3] Production import
 ```
 
-## 🔐 Sicherheitskonzept
+## 🔐 Security Concept
 
-### Credential-Management pro Environment
+### Credential Management per Environment
 
 **Development**:
 ```yaml
-# Unverschlüsselt für einfache Entwicklung
+# Unencrypted for easy development
 vault_n8n_password: "dev-admin123"
 vault_postgres_password: "dev-postgres123"
 vault_encryption_key: "dev-encryption-key-12345"
@@ -161,32 +161,32 @@ vault_encryption_key: "dev-encryption-key-12345"
 
 **Pre-Production**:
 ```yaml
-# Verschlüsselt mit Ansible Vault
+# Encrypted with Ansible Vault
 $ANSIBLE_VAULT;1.1;AES256
 66386439653...
 ```
 
 **Production**: 
 ```yaml
-# Ultra-sicher verschlüsselt
+# Ultra-secure encrypted
 $ANSIBLE_VAULT;1.1;AES256
 99816523987...
 ```
 
-### Vault-Verwaltung
+### Vault Management
 ```bash
-# Vault-Manager starten
+# Start vault manager
 ./manage-vault.sh
 
-# Oder direkt Commands
+# Or direct commands
 ./manage-vault.sh edit production
 ./manage-vault.sh view preproduction
 ./manage-vault.sh encrypt development
 ```
 
-## 🔄 Ansible-Pipeline
+## 🔄 Ansible Pipeline
 
-### Inventories pro Environment
+### Inventories per Environment
 ```yaml
 # ansible/inventories/development/hosts.yml
 all:
@@ -216,37 +216,37 @@ all:
           n8n_environment: production
 ```
 
-### Playbook-Execution
+### Playbook Execution
 ```bash
-# Native Installation
+# Native installation
 ansible-playbook -i ansible/inventories/production/hosts.yml \
                  ansible/playbooks/install-n8n-native.yml \
                  --limit prod-01
 
-# Docker Installation  
+# Docker installation  
 ansible-playbook -i ansible/inventories/preproduction/hosts.yml \
                  ansible/playbooks/install-n8n-docker.yml \
                  --limit staging-01
 
-# Workflow Import
+# Workflow import
 ansible-playbook -i ansible/inventories/development/hosts.yml \
                  ansible/playbooks/import-n8n-workflows.yml \
                  --limit local
 ```
 
-## 🛠️ Management-Tools
+## 🛠️ Management Tools
 
 ### 1. Multi-Environment Manager
 ```bash
 ./manage-environments.sh
 ```
 **Features**:
-- Umgebungs-spezifische Server-Listen
-- Installationstyp-Auswahl (Native/Docker)
-- Bulk-Operations für alle Server
-- Status-Dashboard
+- Environment-specific server lists
+- Installation type selection (Native/Docker)
+- Bulk operations for all servers
+- Status dashboard
 
-### 2. Server-Konfiguration
+### 2. Server Configuration
 ```bash
 # Server-Listen anzeigen
 ./server-config.sh list production
@@ -348,49 +348,49 @@ ansible -i ansible/inventories/production/hosts.yml \
 1. Niemals echte Credentials in Git committen
 2. Ansible Vault für alle Non-Dev Environments
 3. Regelmäßige Vault-Passwort Rotation
-4. SSH-Key basierte Authentifizierung
+4. SSH key-based authentication
 
 ### 3. Deployment
-1. Dry-Run vor jedem Production-Deployment
-2. Backup vor jedem Import
-3. Staged Rollout auf multiple Server
-4. Rollback-Plan verfügbar halten
+1. Dry-run before every production deployment
+2. Backup before every import
+3. Staged rollout to multiple servers
+4. Keep rollback plan available
 
 ### 4. Monitoring
-1. Regelmäßige Status-Checks
-2. Automatisierte Backup-Validierung  
-3. SSL-Zertifikat Monitoring
-4. Performance-Überwachung
+1. Regular status checks
+2. Automated backup validation  
+3. SSL certificate monitoring
+4. Performance monitoring
 
 ## 🚀 Quick Start
 
-### Komplettes Setup in 5 Minuten
+### Complete Setup in 5 Minutes
 ```bash
-# 1. Klone Repository
+# 1. Clone repository
 git clone https://github.com/Hammdie/n8n-install.git
 cd n8n-install
 
-# 2. Development Environment erstellen
+# 2. Create development environment
 ./setup-development.sh my-project development
 
-# 3. Lokales n8n starten
+# 3. Start local n8n
 cd ~/n8n-development/my-project/n8n-workflows
 docker-compose -f docker-compose.development.yml up -d
 
-# 4. Multi-Environment Manager starten
+# 4. Start multi-environment manager
 cd ~/n8n-install
 ./manage-environments.sh
 
-# 5. Workflows entwickeln und deployen!
+# 5. Develop and deploy workflows!
 ```
 
 ## 📞 Support
 
-Bei Problemen:
+For problems:
 
-1. **Logs prüfen**: `./manage-docker.sh logs` oder `journalctl -u n8n -f`
-2. **Status-Dashboard**: `./manage-environments.sh` → [7]
-3. **Server-Connectivity**: `./server-config.sh check <environment>`
-4. **Vault-Probleme**: `./manage-vault.sh status`
+1. **Check logs**: `./manage-docker.sh logs` or `journalctl -u n8n -f`
+2. **Status dashboard**: `./manage-environments.sh` → [7]
+3. **Server connectivity**: `./server-config.sh check <environment>`
+4. **Vault issues**: `./manage-vault.sh status`
 
-Die Suite ist vollständig dokumentiert und bereit für produktiven Einsatz! 🎉
+The suite is fully documented and ready for production use! 🎉

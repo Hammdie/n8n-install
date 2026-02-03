@@ -1,53 +1,53 @@
-# 🚀 n8n Installation Suite - Feature Übersicht
+# 🚀 n8n Installation Suite - Feature Overview
 
-## 📋 Installationsoptionen
+## 📋 Installation Options
 
 ### 🖥️ Native Installation
-- **Node.js 18.x** direkt auf dem System
-- **PostgreSQL** als lokale Datenbank
-- **systemd Service** für automatischen Start
-- Direkte System-Integration
-- Optimale Performance
+- **Node.js 18.x** directly on system
+- **PostgreSQL** as local database
+- **systemd service** for automatic startup
+- Direct system integration
+- Optimal performance
 
 ### 🐳 Docker Compose Installation
-- **Containerisierte** n8n-Instance
-- **PostgreSQL Container** mit persistenten Volumes
-- **Health Checks** für alle Services
-- Einfaches Deployment und Skalierung
-- Isolierte Umgebung
+- **Containerized** n8n instance
+- **PostgreSQL container** with persistent volumes
+- **Health checks** for all services
+- Simple deployment and scaling
+- Isolated environment
 
-## 🔐 Sicherheitsfeatures
+## 🔐 Security Features
 
 ### Encryption Key Management
-- **Zentrale Speicherung** in `/var/n8n/`
-- **600/700 Berechtigungen** für maximale Sicherheit
-- **Persistente Schlüssel** zwischen Installationen
-- **Backup/Restore** unterstützt Verschlüsselung
+- **Central storage** in `/var/n8n/`
+- **600/700 permissions** for maximum security
+- **Persistent keys** between installations
+- **Backup/restore** supports encryption
 
-### SSH-Sicherheit
-- **Dedicated SSH-User** "odoo" 
-- **Key-basierte Authentifizierung**
-- **Sudoers-Konfiguration** für n8n-Management
-- **Sichere Aliase** für alle Management-Befehle
+### SSH Security
+- **Dedicated SSH user** "odoo" 
+- **Key-based authentication**
+- **Sudoers configuration** for n8n management
+- **Secure aliases** for all management commands
 
 ## 🌐 Web & Proxy Features
 
 ### Reverse Proxy
-- **nginx** als SSL-Termination
-- **Let's Encrypt** automatische SSL-Zertifikate
-- **Multi-Domain Support** für mehrere Instanzen
-- **WebSocket Support** für n8n-Features
-- **Security Headers** für erhöhte Sicherheit
+- **nginx** as SSL termination
+- **Let's Encrypt** automatic SSL certificates
+- **Multi-domain support** for multiple instances
+- **WebSocket support** for n8n features
+- **Security headers** for enhanced security
 
-### Firewall-Konfiguration
-- **UFW** automatische Konfiguration
-- **Port 80/443** für Web-Traffic
-- **Port 22** für SSH
-- **Minimal Attack Surface**
+### Firewall Configuration
+- **UFW** automatic configuration
+- **Port 80/443** for web traffic
+- **Port 22** for SSH
+- **Minimal attack surface**
 
 ## 🛠️ Management Tools
 
-### Hauptverwaltung (`n8n-menu.sh`)
+### Main Management (`n8n-menu.sh`)
 ```
 ===============================
     🚀 n8n Management System    
@@ -86,173 +86,173 @@
 
 ## 💾 Backup & Restore
 
-### Backup-Features
-- **Automatisierte Backups** mit Zeitstempel
-- **PostgreSQL Database Dumps**
-- **Konfigurationsdateien Backup**
-- **Encryption Key Backup**
-- **Docker Volume Backup** (bei Docker-Installation)
-- **Komprimierte Backup-Archive**
+### Backup Features
+- **Automated backups** with timestamps
+- **PostgreSQL database dumps**
+- **Configuration file backup**
+- **Encryption key backup**
+- **Docker volume backup** (Docker installation)
+- **Compressed backup archives**
 
-### Restore-Features
-- **Vollständige Systemwiederherstellung**
-- **Selektives Restore** von Komponenten
-- **Encryption Key Wiederherstellung**
-- **Service-Neustart** nach Restore
-- **Backup-Validierung**
+### Restore Features
+- **Complete system recovery**
+- **Selective restore** of components
+- **Encryption key recovery**
+- **Service restart** after restore
+- **Backup validation**
 
 ## 🔄 Update & Maintenance
 
 ### Native Updates
-- **n8n Version Updates**
-- **Node.js Updates**
-- **System Package Updates**
-- **Service-Restart Management**
+- **n8n version updates**
+- **Node.js updates**
+- **System package updates**
+- **Service restart management**
 
 ### Docker Updates  
-- **Image Updates** für alle Container
-- **Version Pinning** für Stabilität
-- **Rolling Updates** ohne Downtime
-- **Rollback-Fähigkeit**
+- **Image updates** for all containers
+- **Version pinning** for stability
+- **Rolling updates** without downtime
+- **Rollback capability**
 
 ## 📊 Monitoring & Logging
 
 ### Status Dashboard
-- **Service Status** (Running/Stopped)
-- **Port Availability**
-- **SSL Certificate Status**
-- **Disk Space Usage**
-- **Memory Usage**
-- **Database Connection**
+- **Service status** (Running/Stopped)
+- **Port availability**
+- **SSL certificate status**
+- **Disk space usage**
+- **Memory usage**
+- **Database connection**
 
 ### Logging
-- **Strukturierte Logs** für alle Operationen
-- **systemd Journals** (Native)
-- **Docker Container Logs**
-- **nginx Access/Error Logs**
-- **Centralized Log Viewing**
+- **Structured logs** for all operations
+- **systemd journals** (Native)
+- **Docker container logs**
+- **nginx access/error logs**
+- **Centralized log viewing**
 
-## 🎯 SSH-Aliases & Shortcuts
+## 🎯 SSH Aliases & Shortcuts
 
-### Verfügbare Befehle (als odoo-Benutzer)
+### Available Commands (as odoo user)
 ```bash
-n8n-status      # Status Dashboard
-n8n-manage      # Management-Menü
-n8n-menu        # Hauptverwaltungsmenü
-n8n-domains     # Domain-Management
-n8n-docker      # Docker-Verwaltung (nur bei Docker)
-n8n-logs        # Live-Logs anzeigen
-n8n-start       # n8n starten
-n8n-stop        # n8n stoppen
-n8n-restart     # n8n neustarten
-n8n-backup      # Backup erstellen
-n8n-restore     # Backup wiederherstellen
+n8n-status      # Status dashboard
+n8n-manage      # Management menu
+n8n-menu        # Main management menu
+n8n-domains     # Domain management
+n8n-docker      # Docker management (Docker only)
+n8n-logs        # Show live logs
+n8n-start       # Start n8n
+n8n-stop        # Stop n8n
+n8n-restart     # Restart n8n
+n8n-backup      # Create backup
+n8n-restore     # Restore backup
 ```
 
 ## 🏗️ Installation Flow
 
-### 1. Voraussetzungen prüfen
-- Ubuntu Server 20.04+ Erkennung
-- Root-Berechtigung Validierung
-- Internet-Verbindung Test
-- Domain/SSL Validierung
+### 1. Check Prerequisites
+- Ubuntu Server 20.04+ detection
+- Root permission validation
+- Internet connection test
+- Domain/SSL validation
 
-### 2. Installation Method Auswahl
+### 2. Installation Method Selection
 ```
-Wählen Sie die Installationsmethode:
+Choose installation method:
 [1] Native Installation (Node.js + systemd)
 [2] Docker Compose Installation
 
-Ihre Wahl [1-2]:
+Your choice [1-2]:
 ```
 
 ### 3. System Setup
-- **Pakete installieren** (Node.js oder Docker)
-- **Benutzer erstellen** (n8n)
-- **Verzeichnisse erstellen**
-- **Berechtigungen setzen**
+- **Install packages** (Node.js or Docker)
+- **Create users** (n8n)
+- **Create directories**
+- **Set permissions**
 
 ### 4. Database Setup
-- **PostgreSQL Installation/Container**
-- **Datenbank erstellen**
-- **Benutzer konfigurieren**
-- **Verbindung testen**
+- **PostgreSQL installation/container**
+- **Create database**
+- **Configure user**
+- **Test connection**
 
 ### 5. n8n Configuration
-- **Environment Variables**
-- **Service Configuration**
-- **Encryption Key Setup**
-- **Webhook Configuration**
+- **Environment variables**
+- **Service configuration**
+- **Encryption key setup**
+- **Webhook configuration**
 
 ### 6. Web Server Setup
-- **nginx Installation**
-- **Reverse Proxy Configuration**
-- **SSL Certificate (Let's Encrypt)**
-- **Security Headers**
+- **nginx installation**
+- **Reverse proxy configuration**
+- **SSL certificate (Let's Encrypt)**
+- **Security headers**
 
 ### 7. SSH User Setup
-- **odoo User erstellen**
-- **SSH Keys konfigurieren**
-- **Aliases einrichten**
-- **Sudoers Berechtigungen**
+- **Create odoo user**
+- **Configure SSH keys**
+- **Set up aliases**
+- **Sudoers permissions**
 
-## 🔧 Wartung & Best Practices
+## 🔧 Maintenance & Best Practices
 
-### Regelmäßige Wartung
-- **Tägliche Backups** via Cron
-- **Wöchentliche Updates** 
-- **Monatliche Cleanup** (Docker)
-- **SSL Certificate Monitoring**
+### Regular Maintenance
+- **Daily backups** via cron
+- **Weekly updates** 
+- **Monthly cleanup** (Docker)
+- **SSL certificate monitoring**
 
 ### Troubleshooting
-- **Service Status Checks**
-- **Log Analysis Tools**
-- **Database Connection Tests**
-- **SSL Certificate Validation**
-- **Docker Health Checks**
+- **Service status checks**
+- **Log analysis tools**
+- **Database connection tests**
+- **SSL certificate validation**
+- **Docker health checks**
 
-### Performance Optimierung
-- **PostgreSQL Tuning**
-- **nginx Optimization**
-- **Docker Resource Limits**
-- **Log Rotation**
+### Performance Optimization
+- **PostgreSQL tuning**
+- **nginx optimization**
+- **Docker resource limits**
+- **Log rotation**
 
-## 📈 Skalierbarkeit
+## 📈 Scalability
 
 ### Horizontal Scaling
-- **Multi-Domain Support**
-- **Load Balancer Integration**
-- **Database Clustering** (PostgreSQL)
+- **Multi-domain support**
+- **Load balancer integration**
+- **Database clustering** (PostgreSQL)
 
 ### Vertical Scaling
-- **Resource Monitoring**
-- **Container Limits** (Docker)
-- **Service Tuning**
+- **Resource monitoring**
+- **Container limits** (Docker)
+- **Service tuning**
 
 ## 🛡️ Security Hardening
 
 ### System Security
-- **UFW Firewall** aktiviert
-- **fail2ban** Integration möglich
-- **SSH Key-only** Authentication
-- **Minimal User Privileges**
+- **UFW firewall** enabled
+- **fail2ban** integration possible
+- **SSH key-only** authentication
+- **Minimal user privileges**
 
 ### Application Security
-- **Secure Headers** (nginx)
-- **SSL/TLS** Encryption
-- **Database Isolation**
-- **Secure Environment Variables**
+- **Secure headers** (nginx)
+- **SSL/TLS** encryption
+- **Database isolation**
+- **Secure environment variables**
 
-## 📖 Dokumentation
+## 📖 Documentation
 
-### Verfügbare Dokumentation
-- `README.md` - Hauptdokumentation
-- `FEATURES.md` - Diese Feature-Übersicht
-- Inline-Kommentare in allen Skripten
-- Help-Funktionen in Management-Tools
+### Available Documentation
+- `README.md` - Main documentation
+- `FEATURES.md` - This feature overview
+- Inline comments in all scripts
+- Help functions in management tools
 
 ### Support & Troubleshooting
-- Detaillierte Error Messages
-- Logging für alle Operationen
-- Debug-Modi verfügbar
-- Recovery-Procedures dokumentiert
+- Detailed error messages
+- Logging for all operations
+- Debug modes available
+- Recovery procedures documented
