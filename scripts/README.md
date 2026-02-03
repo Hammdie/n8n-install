@@ -1,104 +1,75 @@
-# n8n Installation & Workflow Management Scripts
+# n8n Standard CLI Management Scripts
 
-This directory contains all management scripts for the n8n installation suite including specialized workflow import/export tools.
+This directory contains **standard n8n CLI-based scripts** for managing workflows and credentials across different environments. All scripts use only official n8n CLI commands.
 
 ## Directory Structure
 
-### 🔄 **Workflow Management Scripts** *(New Addition)*
-Specialized scripts for n8n workflow import/export operations:
-- `clean-api-import.sh` - **Main script** for API-based workflow import with JSON cleaning
-- `api-import.sh` - Basic API import script
-- `sqlite-import.sh` - Direct SQLite database import
-- `update-workflows.py` - **Python-based update system** with ID mapping
-- `update-workflows.sh` - Bash alternative for updates
-
-**🎯 Workflow Usage:**
-```bash
-cd /Users/dietmar.hamm/PycharmProjects/n8n-install/development
-
-# Import from production
-../scripts/clean-api-import.sh 360Group
-
-# Update workflows after changes
-../scripts/update-workflows.py 360Group interactive
-
-# Show ID mappings
-../scripts/update-workflows.py 360Group list
+```
+scripts/
+├── deployment/               # Installation & environment setup
+├── workflows/               # Data pipeline management  
+├── host/                    # System maintenance
+├── management/              # Interactive user interfaces
+├── docker/                  # Container operations
+└── README-standard-cli.md   # Detailed CLI documentation
 ```
 
-### 🐳 [docker/](docker/)
-Docker-specific management scripts:
-- `manage-docker.sh` - Docker Compose management interface
+## Standard CLI Scripts
 
-### 🚀 [deployment/](deployment/)
-Installation and deployment scripts:
-- `install-n8n.sh` - Main n8n installation script (Native & Docker)
-- `manage-environments.sh` - Multi-environment management system
-- `setup-reverse-proxy.sh` - nginx reverse proxy configuration
-- `server-config.sh` - Server configuration and optimization
-- `manage-domains.sh` - Domain and SSL certificate management
-- `setup-development.sh` - Development environment setup
+### 📤 Export Scripts
+- `export-workflows-cli.sh` - Export workflows using `n8n export:workflow --backup`
+- `export-credentials-cli.sh` - Export credentials using `n8n export:credentials --all`
 
-#### 📋 [deployment/ansible/](deployment/ansible/)
-Ansible automation scripts:
-- `manage-vault.sh` - Ansible Vault credential management
+### 📥 Import Scripts  
+- `import-workflows-cli.sh` - Import workflows using `n8n import:workflow --separate`
+- `import-credentials-cli.sh` - Import credentials using `n8n import:credentials`
 
-### 🖥️ [host/](host/)
-Host-level maintenance and administration:
-- `backup-n8n.sh` - Complete system backup solution
-- `restore-n8n.sh` - System restore from backups
-- `setup-ssh-user.sh` - SSH user configuration for automation
-- `update-n8n.sh` - n8n version updates and maintenance
+### 🔄 Migration Scripts
+- `migrate-production-to-dev.sh` - Complete production to development migration
 
-### ⚙️ [management/](management/)
-Central management interfaces:
-- `n8n-menu.sh` - Main interactive management menu
+### Development Environment
+- `deployment/setup-development.sh` - Create development workspaces
+- `deployment/manage-environments.sh` - Multi-environment management
 
-### 📋 [workflows/](workflows/)
-Workflow and data management:
-- `export-workflows.sh` - Export workflows and credentials
-- `import-workflows.sh` - Import workflows via Ansible
-- `extract-to-development.sh` - Extract all workflows/credentials to development structure
+### System Operations
+- `host/backup-n8n.sh` - Backup n8n data
+- `host/update-n8n.sh` - Update n8n installation
 
-## Quick Start
+## Usage Examples
 
-1. **Fresh Installation:**
-   ```bash
-   sudo ./deployment/install-n8n.sh
-   ```
+### Export from Development Environment
+```bash
+cd development/
+../scripts/export-workflows-cli.sh 360Group
+../scripts/export-credentials-cli.sh 360Group
+```
 
-2. **Management Menu:**
-   ```bash
-   ./management/n8n-menu.sh
-   ```
+### Import to Development Environment
+```bash
+cd development/
+../scripts/import-workflows-cli.sh 360Group
+../scripts/import-credentials-cli.sh 360Group
+```
 
-3. **Multi-Environment Setup:**
-   ```bash
-   ./deployment/manage-environments.sh
-   ```
+### Production to Development Migration
+```bash
+cd development/
+../scripts/migrate-production-to-dev.sh 360Group n8n-sandbox.detalex.de root
+```
 
-4. **Development Environment:**
-   ```bash
-   ./deployment/setup-development.sh my-project development
-   ```
+### Setup Development Environment
+```bash
+./deployment/setup-development.sh my-project development
+```
 
-## Script Categories
+## 📖 Detailed Documentation
 
-| Category | Purpose | Target User |
-|----------|---------|-------------|
-| **docker** | Container management | DevOps Teams |
-| **deployment** | Installation & Setup | System Administrators |
-| **host** | System Maintenance | Operations Teams |
-| **management** | Daily Operations | End Users |
-| **workflows** | Data Management | Developers |
+See [README-standard-cli.md](README-standard-cli.md) for complete documentation of all standard CLI commands and usage examples.
 
-## Security Notes
+## ✅ Standard CLI Advantages
 
-- All scripts require appropriate permissions
-- Production deployments use Ansible Vault for secrets
-- Development environments include Git integration
-- Backup scripts preserve encryption keys
-
-## For More Information
-
-See [../documentation/](../documentation/) for detailed guides and architecture documentation.
+1. **🔒 Official Support** - Uses only documented n8n CLI commands
+2. **🛡️ No Database Hacks** - Avoids direct SQLite manipulation  
+3. **📦 Version Compatible** - Works with all n8n versions
+4. **🔄 Future-Proof** - No dependency on internal database structure
+5. **💼 Production Ready** - Same commands used in production environments
