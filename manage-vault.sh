@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Ansible Vault Management für verschiedene Umgebungen
-# Sichere Verwaltung von Credentials und Secrets
+# Ansible Vault Management for different environments
+# Secure management of credentials and secrets
 
 set -e
 
@@ -22,22 +22,22 @@ DEV_VAULT="$VAULT_DIR/development/vault.yml"
 PREPROD_VAULT="$VAULT_DIR/preproduction/vault.yml"
 PROD_VAULT="$VAULT_DIR/production/vault.yml"
 
-# Funktionen
+# Functions
 create_vault_structure() {
-    log "Erstelle Vault-Struktur..."
+    log "Creating vault structure..."
     
     mkdir -p "$VAULT_DIR"/{development,preproduction,production}
     
-    # Development Vault (unverschlüsselt für einfache Entwicklung)
+    # Development Vault (unencrypted for easy development)
     if [ ! -f "$DEV_VAULT" ]; then
         cat > "$DEV_VAULT" << 'EOF'
 ---
-# Development Vault (unverschlüsselt)
+# Development Vault (unencrypted)
 vault_n8n_password: "dev-admin123"
 vault_postgres_password: "dev-postgres123"
 vault_encryption_key: "dev-encryption-key-12345"
 
-# API Keys für Development
+# API Keys for Development
 vault_smtp_password: "dev-smtp-pass"
 vault_webhook_secret: "dev-webhook-secret"
 vault_oauth_client_secret: "dev-oauth-secret"
@@ -51,20 +51,20 @@ vault_github_token: "dev_github_token"
 vault_aws_access_key: "AKIADEV123456"
 vault_aws_secret_key: "dev_aws_secret_key"
 EOF
-        info "Development Vault erstellt (unverschlüsselt)"
+        info "Development Vault created (unencrypted)"
     fi
     
-    # Pre-Production Vault (verschlüsselt)
+    # Pre-Production Vault (encrypted)
     if [ ! -f "$PREPROD_VAULT" ]; then
-        log "Erstelle Pre-Production Vault..."
+        log "Creating Pre-Production Vault..."
         cat > /tmp/preprod_vault.yml << 'EOF'
 ---
-# Pre-Production Vault (verschlüsselt)
+# Pre-Production Vault (encrypted)
 vault_n8n_password: "staging-secure-password-123"
 vault_postgres_password: "staging-db-password-456"
 vault_encryption_key: "staging-encryption-key-very-secure-789"
 
-# API Keys für Pre-Production
+# API Keys for Pre-Production
 vault_smtp_password: "staging-smtp-secure-pass"
 vault_webhook_secret: "staging-webhook-secret-key"
 vault_oauth_client_secret: "staging-oauth-client-secret"

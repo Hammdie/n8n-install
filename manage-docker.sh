@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # n8n Docker Management Script
-# Verwaltung von n8n Docker Compose Installation
+# Management of n8n Docker Compose installation
 
 set -e
 
@@ -32,18 +32,18 @@ info() {
     echo -e "${BLUE}[INFO] $1${NC}"
 }
 
-# Prüfe ob Docker Compose Installation vorliegt
+# Check if Docker Compose installation exists
 check_docker_installation() {
     if [[ ! -f "/root/n8n-db-credentials.txt" ]]; then
-        error "Keine n8n Installation gefunden"
+        error "No n8n installation found"
     fi
     
     if ! grep -q "INSTALL_TYPE=docker" /root/n8n-db-credentials.txt; then
-        error "Diese Installation ist nicht Docker-basiert"
+        error "This installation is not Docker-based"
     fi
     
     if [[ ! -d "$DOCKER_DIR" ]]; then
-        error "Docker Verzeichnis nicht gefunden: $DOCKER_DIR"
+        error "Docker directory not found: $DOCKER_DIR"
     fi
 }
 
@@ -57,23 +57,23 @@ docker_status() {
         echo -e "${YELLOW}Container Details:${NC}"
         docker compose ps --format "table {{.Name}}\t{{.Image}}\t{{.Status}}"
     else
-        warning "Docker Services nicht erreichbar"
+        warning "Docker Services not reachable"
     fi
 }
 
-# Docker Logs anzeigen
+# Show Docker logs
 docker_logs() {
     local service="$1"
     cd "$DOCKER_DIR"
     
     if [[ -n "$service" ]]; then
-        log "Zeige Logs für Service: $service"
+        log "Showing logs for service: $service"
         docker compose logs -f "$service"
     else
-        echo "Verfügbare Services:"
+        echo "Available services:"
         docker compose config --services
         echo ""
-        read -p "Service auswählen (oder Enter für alle): " service
+        read -p "Select service (or Enter for all): " service
         if [[ -n "$service" ]]; then
             docker compose logs -f "$service"
         else

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Multi-Environment n8n Management
-# Verwaltet verschiedene n8n-Umgebungen mit getrennten Server-Listen
+# Manages different n8n environments with separated server lists
 
 set -e
 
@@ -17,13 +17,13 @@ error() { echo -e "${RED}[ERROR] $1${NC}"; exit 1; }
 warning() { echo -e "${YELLOW}[WARNING] $1${NC}"; }
 info() { echo -e "${BLUE}[INFO] $1${NC}"; }
 
-# Umgebungs-Konfiguration
+# Environment configuration
 declare -A ENVIRONMENTS
-ENVIRONMENTS[development]="Lokale Entwicklung"
+ENVIRONMENTS[development]="Local Development"
 ENVIRONMENTS[preproduction]="Pre-Production Testing" 
 ENVIRONMENTS[production]="Live Production"
 
-# Server-Konfiguration pro Umgebung
+# Server configuration per environment
 declare -A DEV_SERVERS
 DEV_SERVERS[local]="localhost"
 DEV_SERVERS[dev-vm]="dev.internal.com"
@@ -46,20 +46,20 @@ show_main_menu() {
     echo -e "${PURPLE}    🚀 n8n Multi-Environment Manager          ${NC}"
     echo -e "${PURPLE}================================================${NC}"
     echo ""
-    echo -e "${BLUE}Verfügbare Umgebungen:${NC}"
+    echo -e "${BLUE}Available Environments:${NC}"
     echo ""
-    echo -e "${GREEN}[1] 🛠️  Development${NC}     - Lokale Entwicklung"
+    echo -e "${GREEN}[1] 🛠️  Development${NC}     - Local Development"
     echo -e "${YELLOW}[2] 🧪 Pre-Production${NC}  - Staging & Testing"  
     echo -e "${RED}[3] 🏭 Production${NC}       - Live Environment"
     echo ""
-    echo -e "${BLUE}Management Optionen:${NC}"
+    echo -e "${BLUE}Management Options:${NC}"
     echo ""
-    echo -e "[4] 📋 Server-Listen anzeigen"
-    echo -e "[5] ⚙️  Environment konfigurieren"
-    echo -e "[6] 🔄 Bulk-Deployment"
-    echo -e "[7] 📊 Status Dashboard"
-    echo -e "[8] 🆘 Hilfe"
-    echo -e "[0] ❌ Beenden"
+    echo -e "[4] 📋 Show server lists"
+    echo -e "[5] ⚙️  Configure environment"
+    echo -e "[6] 🔄 Bulk deployment"
+    echo -e "[7] 📊 Status dashboard"
+    echo -e "[8] 🆘 Help"
+    echo -e "[0] ❌ Exit"
     echo ""
 }
 
@@ -74,8 +74,8 @@ show_environment_menu() {
     echo -e "${PURPLE}================================================${NC}"
     echo ""
     
-    # Server-Liste anzeigen
-    echo -e "${BLUE}Verfügbare Server:${NC}"
+    # Show server list
+    echo -e "${BLUE}Available Servers:${NC}"
     echo ""
     
     case $env in

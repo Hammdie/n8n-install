@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# n8n Installation Script für Ubuntu Server
-# Autor: Automatisch generiert
-# Datum: $(date)
+# n8n Installation Script for Ubuntu Server
+# Author: Automatically generated
+# Date: $(date)
 
 set -e  # Exit bei Fehlern
 
@@ -26,54 +26,54 @@ warning() {
     echo -e "${YELLOW}[WARNING] $1${NC}"
 }
 
-# Prüfe Root-Rechte
+# Check root privileges
 if [[ $EUID -ne 0 ]]; then
-   error "Dieses Script muss als root ausgeführt werden"
+   error "This script must be run as root"
 fi
 
-# Installationsmethode abfragen
+# Ask for installation method
 echo ""
-echo -e "${BLUE}═══ n8n Installationsmethode wählen ═══${NC}"
+echo -e "${BLUE}═══ Choose n8n Installation Method ═══${NC}"
 echo ""
 echo "1. Native Installation (Node.js + PostgreSQL)"
 echo "2. Docker Compose Installation (Container)"
 echo ""
 
 while true; do
-    read -p "Wählen Sie die Installationsmethode (1 oder 2): " INSTALL_METHOD
+    read -p "Choose installation method (1 or 2): " INSTALL_METHOD
     case $INSTALL_METHOD in
         1)
             INSTALL_TYPE="native"
-            log "Native Installation gewählt"
+            log "Native installation selected"
             break
             ;;
         2)
             INSTALL_TYPE="docker"
-            log "Docker Compose Installation gewählt"
+            log "Docker Compose installation selected"
             break
             ;;
         *)
-            error "Ungültige Auswahl. Bitte wählen Sie 1 oder 2."
+            error "Invalid selection. Please choose 1 or 2."
             ;;
     esac
 done
 
 echo ""
 
-# Variablen (anpassbar)
+# Variables (customizable)
 N8N_USER="n8n"
 N8N_HOME="/home/$N8N_USER"
 N8N_DIR="$N8N_HOME/n8n"
 POSTGRES_DB="n8n_db"
 POSTGRES_USER="n8n_user"
 POSTGRES_PASSWORD=$(openssl rand -base64 32)
-DOMAIN_NAME="${1:-localhost}"  # Parameter oder localhost
-EMAIL="${2:-admin@example.com}"  # Parameter oder default
+DOMAIN_NAME="${1:-localhost}"  # Parameter or localhost
+EMAIL="${2:-admin@example.com}"  # Parameter or default
 
-log "Starte n8n Installation auf Ubuntu Server..."
+log "Starting n8n installation on Ubuntu Server..."
 log "Domain: $DOMAIN_NAME"
 log "Email: $EMAIL"
-log "Installationstyp: $INSTALL_TYPE"
+log "Installation type: $INSTALL_TYPE"
 
 if [[ "$INSTALL_TYPE" == "docker" ]]; then
     # Docker Compose Installation
@@ -86,16 +86,16 @@ fi
 # Gemeinsame Abschlusskonfiguration
 post_install_config
 
-# Docker Compose Installation Funktion
+# Docker Compose Installation Function
 install_docker_compose() {
-    log "Starte Docker Compose Installation..."
+    log "Starting Docker Compose installation..."
 
     # System Update
-    log "Aktualisiere System..."
+    log "Updating system..."
     apt update && apt upgrade -y
 
-    # Docker und Docker Compose installieren
-    log "Installiere Docker und Docker Compose..."
+    # Install Docker and Docker Compose
+    log "Installing Docker and Docker Compose..."
     apt install -y \
         curl \
         wget \
@@ -110,13 +110,13 @@ install_docker_compose() {
         certbot \
         python3-certbot-nginx
 
-    # Docker GPG Key hinzufügen
+    # Add Docker GPG key
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-    # Docker Repository hinzufügen
+    # Add Docker repository
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-    # Docker installieren
+    # Install Docker
     apt update
     apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 

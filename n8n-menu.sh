@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# n8n Management Hauptmenü
-# Zentrales Verwaltungsmenü für alle n8n-Funktionen
+# n8n Management Main Menu
+# Central management menu for all n8n functions
 
 set -e
 
@@ -40,19 +40,19 @@ success() {
     echo -e "${GREEN}[SUCCESS] $1${NC}"
 }
 
-# Banner anzeigen
+# Show banner
 show_banner() {
     clear
     echo -e "${BLUE}"
     echo "╔══════════════════════════════════════════════════════════════╗"
     echo "║                    n8n Management Center                     ║"
-    echo "║                     Hauptverwaltungsmenü                     ║"
+    echo "║                     Main Administration Menu                 ║"
     echo "╚══════════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
     echo ""
 }
 
-# System-Status anzeigen
+# Show system status
 show_system_status() {
     echo -e "${CYAN}═══ System Status ═══${NC}"
     
