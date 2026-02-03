@@ -1,190 +1,190 @@
 # 🚀 n8n Installation & Multi-Environment Management Suite
 
-> **Vollständige n8n-Installation mit lokaler Entwicklung, Git-Integration und Ansible-basiertem Multi-Environment-Deployment**
+> **Complete n8n installation with local development, Git integration, and Ansible-based multi-environment deployment**
 
 ## 📋 Quick Navigation
 
-### 🎯 **Hauptdokumentation**
-| Dokument | Beschreibung | Direkt zu |
-|----------|--------------|----------|
-| **[� INDEX](INDEX.md)** | **Zentrale Navigation zu ALLEM** | **[🎯 Hier springen](INDEX.md)** |
-| **[�📖 Diese README](README.md)** | Hauptdokumentation & Installation | Sie sind hier |
-| **[🌍 Multi-Environment Guide](MULTI-ENVIRONMENT.md)** | Development → Production Workflow | [Hier springen](MULTI-ENVIRONMENT.md) |
-| **[🚀 Feature-Übersicht](FEATURES.md)** | Alle verfügbaren Features im Detail | [Hier springen](FEATURES.md) |
+### 🎯 **Main Documentation**
+| Document | Description | Direct Link |
+|----------|-------------|-------------|
+| **[📑 INDEX](INDEX.md)** | **Central Navigation to EVERYTHING** | **[🎯 Jump Here](INDEX.md)** |
+| **[📖 This README](README.md)** | Main Documentation & Installation | You are here |
+| **[🌍 Multi-Environment Guide](MULTI-ENVIRONMENT.md)** | Development → Production Workflow | [Jump Here](MULTI-ENVIRONMENT.md) |
+| **[🚀 Feature Overview](FEATURES.md)** | All Available Features in Detail | [Jump Here](FEATURES.md) |
 
-### 🛠️ **Management-Tools** 
-| Tool | Zweck | Quick Launch |
-|------|-------|-------------|
-| **[🌐 Multi-Environment Manager](manage-environments.sh)** | Zentrale Umgebungsverwaltung | `./manage-environments.sh` |
-| **[🔧 Haupt-Installation](install-n8n.sh)** | n8n installieren (Native/Docker) | `./install-n8n.sh <domain> <email>` |
-| **[🎛️ n8n Management Menü](n8n-menu.sh)** | Alle n8n-Operationen | `./n8n-menu.sh` |
-| **[🔐 Vault Manager](manage-vault.sh)** | Sichere Credential-Verwaltung | `./manage-vault.sh` |
+### 🛠️ **Management Tools** 
+| Tool | Purpose | Quick Launch |
+|------|---------|-------------|
+| **[🌐 Multi-Environment Manager](manage-environments.sh)** | Central Environment Management | `./manage-environments.sh` |
+| **[🔧 Main Installation](install-n8n.sh)** | Install n8n (Native/Docker) | `./install-n8n.sh <domain> <email>` |
+| **[🎛️ n8n Management Menu](n8n-menu.sh)** | All n8n Operations | `./n8n-menu.sh` |
+| **[🔐 Vault Manager](manage-vault.sh)** | Secure Credential Management | `./manage-vault.sh` |
 
-### 📦 **Workflow-Management**
-| Script | Funktion | Verwendung |
-|--------|----------|------------|
+### 📦 **Workflow Management**
+| Script | Function | Usage |
+|--------|----------|-------|
 | **[📤 Export](export-workflows.sh)** | n8n → Git Export | `./export-workflows.sh <environment>` |
 | **[📥 Import](import-workflows.sh)** | Git → n8n Import | `./import-workflows.sh <env> <server>` |
-| **[🏗️ Development Setup](setup-development.sh)** | Dev-Environment erstellen | `./setup-development.sh <name> <env>` |
+| **[🏗️ Development Setup](setup-development.sh)** | Create Dev Environment | `./setup-development.sh <name> <env>` |
 
 ### ⚙️ **Server & Environment Management**
-| Tool | Zweck | Quick Access |
-|------|-------|-------------|
-| **[📋 Server-Konfiguration](server-config.sh)** | Server-Listen verwalten | `./server-config.sh list <env>` |
-| **[🐳 Docker Management](manage-docker.sh)** | Container-Verwaltung | `./manage-docker.sh status` |
+| Tool | Purpose | Quick Access |
+|------|---------|-------------|
+| **[📋 Server Configuration](server-config.sh)** | Manage Server Lists | `./server-config.sh list <env>` |
+| **[🐳 Docker Management](manage-docker.sh)** | Container Management | `./manage-docker.sh status` |
 | **[🌐 Domain Management](manage-domains.sh)** | SSL & Domains | SSH: `n8n-domains` |
 
 ### 💾 **Backup & Maintenance**
-| Script | Funktion | SSH Alias |
-|--------|----------|-----------|
-| **[💾 Backup](backup-n8n.sh)** | n8n-Backup erstellen | `n8n-backup` |
-| **[🔄 Restore](restore-n8n.sh)** | Backup wiederherstellen | `n8n-restore` |
-| **[🔄 Update](update-n8n.sh)** | n8n aktualisieren | `n8n-update` |
+| Script | Function | SSH Alias |
+|--------|----------|----------|
+| **[💾 Backup](backup-n8n.sh)** | Create n8n Backup | `n8n-backup` |
+| **[🔄 Restore](restore-n8n.sh)** | Restore Backup | `n8n-restore` |
+| **[🔄 Update](update-n8n.sh)** | Update n8n | `n8n-update` |
 
 ---
 
-## 📋 Suite-Komponenten
+## 📋 Suite Components
 
-### 🎯 **Kern-Installation**
-- **[install-n8n.sh](install-n8n.sh)** - Vollständige n8n-Installation ([Native](install-n8n.sh#L45) oder [Docker](install-n8n.sh#L52))
-- **[setup-ssh-user.sh](setup-ssh-user.sh)** - SSH-Zugang für [odoo-Benutzer konfigurieren](setup-ssh-user.sh#L30)
-- **[setup-reverse-proxy.sh](setup-reverse-proxy.sh)** - [Zusätzliche Domains](setup-reverse-proxy.sh#L15) mit Reverse Proxy
+### 🎯 **Core Installation**
+- **[install-n8n.sh](install-n8n.sh)** - Complete n8n installation ([Native](install-n8n.sh#L45) or [Docker](install-n8n.sh#L52))
+- **[setup-ssh-user.sh](setup-ssh-user.sh)** - Configure SSH access for [odoo user](setup-ssh-user.sh#L30)
+- **[setup-reverse-proxy.sh](setup-reverse-proxy.sh)** - [Additional domains](setup-reverse-proxy.sh#L15) with reverse proxy
 
 ### 🌍 **Multi-Environment System** 
-- **[manage-environments.sh](manage-environments.sh)** - [Zentrale Umgebungsverwaltung](manage-environments.sh#L25) ([Dev](manage-environments.sh#L40), [Pre-Prod](manage-environments.sh#L45), [Production](manage-environments.sh#L50))
-- **[setup-development.sh](setup-development.sh)** - [Lokale Entwicklungsumgebung](setup-development.sh#L35) mit Git
-- **[server-config.sh](server-config.sh)** - [Server-Listen Konfiguration](server-config.sh#L15) pro Environment
-- **[manage-vault.sh](manage-vault.sh)** - [Ansible Vault Management](manage-vault.sh#L25) für sichere Credentials
+- **[manage-environments.sh](manage-environments.sh)** - [Central environment management](manage-environments.sh#L25) ([Dev](manage-environments.sh#L40), [Pre-Prod](manage-environments.sh#L45), [Production](manage-environments.sh#L50))
+- **[setup-development.sh](setup-development.sh)** - [Local development environment](setup-development.sh#L35) with Git
+- **[server-config.sh](server-config.sh)** - [Server list configuration](server-config.sh#L15) per environment
+- **[manage-vault.sh](manage-vault.sh)** - [Ansible Vault management](manage-vault.sh#L25) for secure credentials
 
-### 📦 **Workflow-Pipeline**
-- **[export-workflows.sh](export-workflows.sh)** - [n8n → Git Export](export-workflows.sh#L40) mit [Backup-Option](export-workflows.sh#L65)
-- **[import-workflows.sh](import-workflows.sh)** - [Git → n8n Import](import-workflows.sh#L55) via [Ansible](import-workflows.sh#L85)
+### 📦 **Workflow Pipeline**
+- **[export-workflows.sh](export-workflows.sh)** - [n8n → Git export](export-workflows.sh#L40) with [backup option](export-workflows.sh#L65)
+- **[import-workflows.sh](import-workflows.sh)** - [Git → n8n import](import-workflows.sh#L55) via [Ansible](import-workflows.sh#L85)
 
-### 🎛️ **Management-Interface**
-- **[n8n-menu.sh](n8n-menu.sh)** - [Hauptverwaltungsmenü](n8n-menu.sh#L20) mit allen Optionen
-- **[manage-domains.sh](manage-domains.sh)** - [Domain-Management](manage-domains.sh#L30) und [SSL-Verwaltung](manage-domains.sh#L65)
-- **[manage-docker.sh](manage-docker.sh)** - [Docker Compose Verwaltung](manage-docker.sh#L25) ([Status](manage-docker.sh#L45), [Logs](manage-docker.sh#L75), [Updates](manage-docker.sh#L95))
+### 🎛️ **Management Interface**
+- **[n8n-menu.sh](n8n-menu.sh)** - [Main management menu](n8n-menu.sh#L20) with all options
+- **[manage-domains.sh](manage-domains.sh)** - [Domain management](manage-domains.sh#L30) and [SSL management](manage-domains.sh#L65)
+- **[manage-docker.sh](manage-docker.sh)** - [Docker Compose management](manage-docker.sh#L25) ([Status](manage-docker.sh#L45), [Logs](manage-docker.sh#L75), [Updates](manage-docker.sh#L95))
 
 ### 💾 **Backup & Maintenance**
-- **[backup-n8n.sh](backup-n8n.sh)** - [Backup-System](backup-n8n.sh#L40) mit [Encryption Key Support](backup-n8n.sh#L85)
-- **[restore-n8n.sh](restore-n8n.sh)** - [Restore-System](restore-n8n.sh#L50) für [vollständige Wiederherstellung](restore-n8n.sh#L95)
-- **[update-n8n.sh](update-n8n.sh)** - [Update-Management](update-n8n.sh#L25) für n8n-Versionen
+- **[backup-n8n.sh](backup-n8n.sh)** - [Backup system](backup-n8n.sh#L40) with [encryption key support](backup-n8n.sh#L85)
+- **[restore-n8n.sh](restore-n8n.sh)** - [Restore system](restore-n8n.sh#L50) for [complete recovery](restore-n8n.sh#L95)
+- **[update-n8n.sh](update-n8n.sh)** - [Update management](update-n8n.sh#L25) for n8n versions
 
 ---
 
 ## 🚀 Installation
 
-### 🎯 **Quick Start Optionen**
+### 🎯 **Quick Start Options**
 
-#### 1️⃣ **Einfache Server-Installation**
+#### 1️⃣ **Simple Server Installation**
 ```bash
-# Repository klonen oder Skripte herunterladen
+# Clone repository or download scripts
 wget https://raw.githubusercontent.com/Hammdie/n8n-install/main/install-n8n.sh
 chmod +x install-n8n.sh
 
-# Installation starten (wird nach Installationsmethode gefragt)
+# Start installation (will ask for installation method)
 sudo ./install-n8n.sh your-domain.com admin@your-domain.com
 
-# Oder für lokale Installation
+# Or for local installation
 sudo ./install-n8n.sh localhost
 ```
 
-#### 2️⃣ **Multi-Environment Development Setup** 📍 **[Detailliertes Guide →](MULTI-ENVIRONMENT.md)**
+#### 2️⃣ **Multi-Environment Development Setup** 📍 **[Detailed Guide →](MULTI-ENVIRONMENT.md)**
 ```bash
-# Vollständiges Repository klonen
+# Clone complete repository
 git clone https://github.com/Hammdie/n8n-install.git
 cd n8n-install
 
-# Development Environment erstellen
+# Create development environment
 ./setup-development.sh my-project development
 
-# Multi-Environment Manager starten
+# Start multi-environment manager
 ./manage-environments.sh
 ```
 
-#### 3️⃣ **Production-Ready mit Ansible** 📍 **[Environment Guide →](MULTI-ENVIRONMENT.md#ansible-pipeline)**
+#### 3️⃣ **Production-Ready with Ansible** 📍 **[Environment Guide →](MULTI-ENVIRONMENT.md#ansible-pipeline)**
 ```bash
-# Server-Konfiguration prüfen
+# Check server configuration
 ./server-config.sh list production
 
-# Vault für sichere Credentials
+# Vault for secure credentials
 ./manage-vault.sh init
 
-# Installation auf allen Servern
+# Install on all servers
 ./manage-environments.sh
-# → [3] Production → [1] n8n installieren
+# → [3] Production → [1] Install n8n
 ```
 
-### ⚙️ **Installationsoptionen während der Installation:**
-1. **[Native Installation](install-n8n.sh#L45)** - Node.js + PostgreSQL direkt auf dem System
-2. **[Docker Compose Installation](install-n8n.sh#L52)** - Containerisierte Lösung mit Docker
+### ⚙️ **Installation Options During Setup:**
+1. **[Native Installation](install-n8n.sh#L45)** - Node.js + PostgreSQL directly on system
+2. **[Docker Compose Installation](install-n8n.sh#L52)** - Containerized solution with Docker
 
-📍 **[→ Detaillierte Installationsanleitung](MULTI-ENVIRONMENT.md#workflow-entwicklung--deployment)**
+📍 **[→ Detailed Installation Guide](MULTI-ENVIRONMENT.md#workflow-development--deployment)**
 
 ---
 
-## 🔧 Was wird installiert?
+## 🔧 What Gets Installed?
 
-### 💻 **System-Komponenten**
+### 💻 **System Components**
 - **Native**: [Node.js 18.x](install-n8n.sh#L120), [PostgreSQL](install-n8n.sh#L140) 
 - **Docker**: [Docker CE](install-n8n.sh#L160), [Docker Compose](install-n8n.sh#L165)
-- **[nginx als Reverse Proxy](setup-reverse-proxy.sh#L45)** für beide Installationstypen
-- **[SSL-Zertifikate via Let's Encrypt](setup-reverse-proxy.sh#L85)** (bei Domain-Installation)
-- **[UFW Firewall-Konfiguration](install-n8n.sh#L200)**
+- **[nginx as reverse proxy](setup-reverse-proxy.sh#L45)** for both installation types
+- **[SSL certificates via Let's Encrypt](setup-reverse-proxy.sh#L85)** (for domain installations)
+- **[UFW firewall configuration](install-n8n.sh#L200)**
 
-### ⚙️ **n8n-Konfiguration**
-- **Native**: [Systemd Service](install-n8n.sh#L220) für automatischen Start
-- **Docker**: [Docker Compose Services](docker-compose.yml) mit [Health Checks](manage-docker.sh#L125)
-- **[PostgreSQL-Datenbank-Integration](install-n8n.sh#L140)** 
-- **[Sichere Encryption Key Verwaltung](install-n8n.sh#L180)** in `/var/n8n/`
-- **[Logging-Konfiguration](install-n8n.sh#L240)**
-- **[Webhook-Support](install-n8n.sh#L260)**
+### ⚙️ **n8n Configuration**
+- **Native**: [Systemd service](install-n8n.sh#L220) for automatic startup
+- **Docker**: [Docker Compose services](docker-compose.yml) with [health checks](manage-docker.sh#L125)
+- **[PostgreSQL database integration](install-n8n.sh#L140)** 
+- **[Secure encryption key management](install-n8n.sh#L180)** in `/var/n8n/`
+- **[Logging configuration](install-n8n.sh#L240)**
+- **[Webhook support](install-n8n.sh#L260)**
 
-### 🌍 **Multi-Environment Features** 📍 **[→ Vollständiger Guide](MULTI-ENVIRONMENT.md)**
-- **[Development Environment](setup-development.sh)** - Lokale Git-basierte Entwicklung
+### 🌍 **Multi-Environment Features** 📍 **[→ Complete Guide](MULTI-ENVIRONMENT.md)**
+- **[Development Environment](setup-development.sh)** - Local Git-based development
 - **[Pre-Production Pipeline](manage-environments.sh#L45)** - Staging & Testing
-- **[Production Deployment](manage-environments.sh#L50)** - Sichere Live-Umgebung
-- **[Ansible-Integration](import-workflows.sh#L85)** für automatisierte Deployments
-- **[Vault-basierte Credential-Verwaltung](manage-vault.sh)**
+- **[Production Deployment](manage-environments.sh#L50)** - Secure live environment
+- **[Ansible Integration](import-workflows.sh#L85)** for automated deployments
+- **[Vault-based credential management](manage-vault.sh)**
 
 ---
 
-## 🛠️ SSH-Management Setup 📍 **[→ SSH-Setup Details](setup-ssh-user.sh)**
+## 🛠️ SSH Management Setup 📍 **[→ SSH Setup Details](setup-ssh-user.sh)**
 
 ```bash
-# SSH-Zugang konfigurieren (wird automatisch bei Installation aufgerufen)
+# Configure SSH access (automatically called during installation)
 sudo ./setup-ssh-user.sh
 ```
 
-### 🔐 **SSH-Benutzer Konfiguration**
-- **[Odoo-Benutzer erstellen](setup-ssh-user.sh#L40)** mit n8n-Management-Rechten
-- **[SSH-Key Authentifizierung](setup-ssh-user.sh#L65)** 
-- **[Sudoers-Konfiguration](setup-ssh-user.sh#L85)** für n8n-spezifische Befehle
-- **[Management-Aliases](setup-ssh-user.sh#L120)** für einfache Bedienung
+### 🔐 **SSH User Configuration**
+- **[Create odoo user](setup-ssh-user.sh#L40)** with n8n management permissions
+- **[SSH key authentication](setup-ssh-user.sh#L65)** 
+- **[Sudoers configuration](setup-ssh-user.sh#L85)** for n8n-specific commands
+- **[Management aliases](setup-ssh-user.sh#L120)** for easy operation
 
-### 🎛️ **Verfügbare SSH-Befehle** 📍 **[→ Alle Aliases](setup-ssh-user.sh#L120)**
+### 🎛️ **Available SSH Commands** 📍 **[→ All Aliases](setup-ssh-user.sh#L120)**
 ```bash
 # Status & Management
-n8n-status      # [Status anzeigen](n8n-menu.sh#L45)
-n8n-manage      # [Management-Menü](n8n-menu.sh#L25)
-n8n-menu        # [Hauptverwaltungsmenü](n8n-menu.sh#L15)
-n8n-domains     # [Domain-Management](manage-domains.sh)
-n8n-docker      # [Docker-Verwaltung](manage-docker.sh) (nur bei Docker-Installation)
+n8n-status      # [Show status](n8n-menu.sh#L45)
+n8n-manage      # [Management menu](n8n-menu.sh#L25)
+n8n-menu        # [Main management menu](n8n-menu.sh#L15)
+n8n-domains     # [Domain management](manage-domains.sh)
+n8n-docker      # [Docker management](manage-docker.sh) (Docker installation only)
 
-# Service-Steuerung
-n8n-logs        # [Live-Logs anzeigen](n8n-menu.sh#L85)
-n8n-start       # [n8n starten](n8n-menu.sh#L95)
-n8n-stop        # [n8n stoppen](n8n-menu.sh#L105)
-n8n-restart     # [n8n neustarten](n8n-menu.sh#L115)
+# Service Control
+n8n-logs        # [Show live logs](n8n-menu.sh#L85)
+n8n-start       # [Start n8n](n8n-menu.sh#L95)
+n8n-stop        # [Stop n8n](n8n-menu.sh#L105)
+n8n-restart     # [Restart n8n](n8n-menu.sh#L115)
 
 # Backup & Restore
-n8n-backup      # [Backup erstellen](backup-n8n.sh)
-n8n-restore     # [Backup wiederherstellen](restore-n8n.sh)
+n8n-backup      # [Create backup](backup-n8n.sh)
+n8n-restore     # [Restore backup](restore-n8n.sh)
 
-# Multi-Environment (falls Setup vorhanden)
-n8n-export      # [Workflows exportieren](export-workflows.sh)
-n8n-import      # [Workflows importieren](import-workflows.sh)
-n8n-vault       # [Vault-Management](manage-vault.sh)
+# Multi-Environment (if setup available)
+n8n-export      # [Export workflows](export-workflows.sh)
+n8n-import      # [Import workflows](import-workflows.sh)
+n8n-vault       # [Vault management](manage-vault.sh)
 ```
 
 ---
@@ -195,26 +195,26 @@ n8n-vault       # [Vault-Management](manage-vault.sh)
 
 #### Native Installation
 ```bash
-# n8n auf neueste Version aktualisieren
+# Update n8n to latest version
 sudo ./update-n8n.sh
 ```
-📍 **[→ Update-Script Details](update-n8n.sh)**
+📍 **[→ Update Script Details](update-n8n.sh)**
 
 #### Docker Installation  
 ```bash
-# Docker Images aktualisieren
+# Update Docker images
 sudo ./manage-docker.sh update
 ```
-📍 **[→ Docker-Management Details](manage-docker.sh#L95)**
+📍 **[→ Docker Management Details](manage-docker.sh#L95)**
 
 ### 🌍 **Multi-Environment Updates** 📍 **[→ Environment Guide](MULTI-ENVIRONMENT.md#deployment)**
 
 ```bash
-# Environment Manager für Updates
+# Environment manager for updates
 ./manage-environments.sh
-# → [Environment wählen] → [4] Update durchführen
+# → [Select Environment] → [4] Perform update
 
-# Oder direkt per Script
+# Or directly via script
 ./import-workflows.sh development local
 ./import-workflows.sh preproduction staging-01
 ./import-workflows.sh production prod-01 --force
@@ -222,77 +222,77 @@ sudo ./manage-docker.sh update
 
 ### 🔐 **Vault & Credential Updates**
 ```bash
-# Vault-Manager für Credential-Updates
+# Vault manager for credential updates
 ./manage-vault.sh edit production
 ./manage-vault.sh rekey preproduction
 ```
-📍 **[→ Vault-Management Guide](manage-vault.sh)**
+📍 **[→ Vault Management Guide](manage-vault.sh)**
 
 ---
 
-## 🐳 Docker-Verwaltung 📍 **[→ Docker Management Details](manage-docker.sh)**
+## 🐳 Docker Management 📍 **[→ Docker Management Details](manage-docker.sh)**
 
-### 🎛️ **Docker-Management-Interface**
+### 🎛️ **Docker Management Interface**
 
 ```bash
-# Interaktives Docker-Management
+# Interactive Docker management
 sudo ./manage-docker.sh
 ```
-📍 **[→ Docker-Menü Interface](manage-docker.sh#L25)**
+📍 **[→ Docker Menu Interface](manage-docker.sh#L25)**
 
-### ⚙️ **Docker-Management-Befehle**
+### ⚙️ **Docker Management Commands**
 
 ```bash
 # Status & Monitoring
-sudo ./manage-docker.sh status     # [Container-Status](manage-docker.sh#L45)
-sudo ./manage-docker.sh logs       # [Logs anzeigen](manage-docker.sh#L75)
-sudo ./manage-docker.sh logs n8n   # [n8n-spezifische Logs](manage-docker.sh#L85)
-sudo ./manage-docker.sh logs postgres  # [PostgreSQL Logs](manage-docker.sh#L95)
+sudo ./manage-docker.sh status     # [Container status](manage-docker.sh#L45)
+sudo ./manage-docker.sh logs       # [Show logs](manage-docker.sh#L75)
+sudo ./manage-docker.sh logs n8n   # [n8n-specific logs](manage-docker.sh#L85)
+sudo ./manage-docker.sh logs postgres  # [PostgreSQL logs](manage-docker.sh#L95)
 
-# Service-Steuerung
-sudo ./manage-docker.sh start      # [Services starten](manage-docker.sh#L55)
-sudo ./manage-docker.sh stop       # [Services stoppen](manage-docker.sh#L65)
-sudo ./manage-docker.sh restart    # [Services neustarten](manage-docker.sh#L75)
+# Service Control
+sudo ./manage-docker.sh start      # [Start services](manage-docker.sh#L55)
+sudo ./manage-docker.sh stop       # [Stop services](manage-docker.sh#L65)
+sudo ./manage-docker.sh restart    # [Restart services](manage-docker.sh#L75)
 
-# Container-Zugriff
-sudo ./manage-docker.sh shell n8n      # [n8n Container Shell](manage-docker.sh#L105)
-sudo ./manage-docker.sh shell postgres # [PostgreSQL Shell](manage-docker.sh#L115)
+# Container Access
+sudo ./manage-docker.sh shell n8n      # [n8n container shell](manage-docker.sh#L105)
+sudo ./manage-docker.sh shell postgres # [PostgreSQL shell](manage-docker.sh#L115)
 
-# Wartung
-sudo ./manage-docker.sh update     # [Images aktualisieren](manage-docker.sh#L125)
-sudo ./manage-docker.sh backup     # [Docker Volume Backup](manage-docker.sh#L135)
-sudo ./manage-docker.sh cleanup    # [System aufräumen](manage-docker.sh#L145)
+# Maintenance
+sudo ./manage-docker.sh update     # [Update images](manage-docker.sh#L125)
+sudo ./manage-docker.sh backup     # [Docker volume backup](manage-docker.sh#L135)
+sudo ./manage-docker.sh cleanup    # [Clean up system](manage-docker.sh#L145)
 ```
 
-### 🔧 **Docker Compose Direktbefehle** 
+### 🔧 **Docker Compose Direct Commands** 
 
 ```bash
-# Im Docker-Verzeichnis
+# In Docker directory
 cd /opt/n8n
 
-# Services verwalten
-docker compose ps              # Status anzeigen
-docker compose logs -f         # Logs verfolgen
-docker compose up -d           # Services starten
-docker compose down            # Services stoppen
-docker compose restart         # Services neustarten
-docker compose pull            # Images aktualisieren
+# Manage services
+docker compose ps              # Show status
+docker compose logs -f         # Follow logs
+docker compose up -d           # Start services
+docker compose down            # Stop services
+docker compose restart         # Restart services
+docker compose pull            # Update images
 ```
-📍 **[→ Docker Compose Konfiguration](docker-compose.yml)**
+📍 **[→ Docker Compose Configuration](docker-compose.yml)**
 
 ---
 
-## 🔧 **Service-Befehle**
+## 🔧 **Service Commands**
 
 ### Native Installation 📍 **[→ Native Setup](install-n8n.sh#L220)**
 ```bash
-# Status prüfen
+# Check status
 sudo systemctl status n8n
 
-# Logs anzeigen
+# Show logs
 sudo journalctl -u n8n -f
 
-# Service-Verwaltung
+# Service management
 sudo systemctl start n8n
 sudo systemctl stop n8n
 sudo systemctl restart n8n
@@ -300,94 +300,94 @@ sudo systemctl restart n8n
 
 ### Docker Installation 📍 **[→ Docker Management](manage-docker.sh)**
 ```bash
-# Status prüfen
+# Check status
 sudo ./manage-docker.sh status
 
-# Logs anzeigen
+# Show logs
 sudo ./manage-docker.sh logs
 
-# Service-Verwaltung
+# Service management
 sudo ./manage-docker.sh start
 sudo ./manage-docker.sh stop
 sudo ./manage-docker.sh restart
 ```
 
-### SSH-Aliases (nach Setup verfügbar) 📍 **[→ SSH-Setup](setup-ssh-user.sh#L120)**
+### SSH Aliases (available after setup) 📍 **[→ SSH Setup](setup-ssh-user.sh#L120)**
 ```bash
-# Einfache Befehle als odoo-User
-n8n-status      # Status-Dashboard
-n8n-start       # n8n starten
-n8n-stop        # n8n stoppen
-n8n-restart     # n8n neustarten
-n8n-logs        # Live-Logs
+# Simple commands as odoo user
+n8n-status      # Status dashboard
+n8n-start       # Start n8n
+n8n-stop        # Stop n8n
+n8n-restart     # Restart n8n
+n8n-logs        # Live logs
 ```
 
 ---
 
-## ⚙️ **Konfiguration**
+## ⚙️ **Configuration**
 
 ### Native Installation 📍 **[→ Native Config](install-n8n.sh#L240)**
-Die Hauptkonfiguration befindet sich in `/home/n8n/n8n/.env`:
+Main configuration is located in `/home/n8n/n8n/.env`:
 
 ```bash
-# Konfiguration bearbeiten
+# Edit configuration
 sudo nano /home/n8n/n8n/.env
 
-# Service nach Änderungen neustarten
+# Restart service after changes
 sudo systemctl restart n8n
 ```
 
 ### Docker Installation 📍 **[→ Docker Config](docker-compose.yml)**
-Die Konfiguration befindet sich in `/opt/n8n/.env`:
+Configuration is located in `/opt/n8n/.env`:
 
 ```bash
-# Konfiguration bearbeiten
+# Edit configuration
 sudo nano /opt/n8n/.env
 
-# Services nach Änderungen neustarten
+# Restart services after changes
 sudo ./manage-docker.sh restart
 ```
 
-### Multi-Environment Konfiguration 📍 **[→ Environment Config](MULTI-ENVIRONMENT.md#sicherheitskonzept)**
+### Multi-Environment Configuration 📍 **[→ Environment Config](MULTI-ENVIRONMENT.md#security-concept)**
 ```bash
-# Vault für sichere Konfiguration
+# Vault for secure configuration
 ./manage-vault.sh edit production
 ./manage-vault.sh view preproduction
 
-# Server-spezifische Konfiguration
+# Server-specific configuration
 ./server-config.sh config production
 ```
 
 ---
 
-## 🌍 Workflow-Development & Multi-Environment
+## 🌍 Workflow Development & Multi-Environment
 
-### 🛠️ **Lokale n8n-Entwicklung** 📍 **[→ Development Guide](MULTI-ENVIRONMENT.md)**
+### 🛠️ **Local n8n Development** 📍 **[→ Development Guide](MULTI-ENVIRONMENT.md)**
 
 ```bash
-# 1. Development Environment erstellen
+# 1. Create development environment
 ./setup-development.sh my-project development
 
-# 2. Lokales n8n starten
+# 2. Start local n8n
 cd ~/n8n-development/my-project/n8n-workflows
 docker-compose -f docker-compose.development.yml up -d
 
-# 3. n8n öffnen: http://localhost:5678
+# 3. Open n8n: http://localhost:5678
 ```
-📍 **[→ Vollständiger Development Workflow](MULTI-ENVIRONMENT.md#workflow-entwicklung--deployment)**
+📍 **[→ Complete Development Workflow](MULTI-ENVIRONMENT.md#workflow-development--deployment)**
 
-### 📦 **Workflow-Management Pipeline**
+### 📦 **Workflow Management Pipeline**
 
 #### 📤 **Export: n8n → Git** 📍 **[→ Export Script](export-workflows.sh)**
 ```bash
-# Workflows aus n8n exportieren
+# Export workflows from n8n
 ./export-workflows.sh development
 ./export-workflows.sh preproduction staging-01
 ```
 
 #### 📥 **Import: Git → n8n** 📍 **[→ Import Script](import-workflows.sh)**
 ```bash
-# Workflows auf Server importieren
+# Import workflows to server
 ./import-workflows.sh preproduction staging-01
 ./import-workflows.sh production prod-01 --force
 ```
@@ -395,135 +395,135 @@ docker-compose -f docker-compose.development.yml up -d
 ### 🌐 **Multi-Environment Management** 📍 **[→ Environment Manager](manage-environments.sh)**
 
 ```bash
-# Zentraler Environment Manager
+# Central environment manager
 ./manage-environments.sh
 
 # Environments:
-# [1] 🛠️ Development     - Lokale Entwicklung  
-# [2] 🧪 Pre-Production  - Staging & Testing
-# [3] 🏭 Production       - Live Environment
+# [1] 🛠️ Development     - Local development  
+# [2] 🧪 Pre-Production  - Staging & testing
+# [3] 🏭 Production       - Live environment
 ```
 
-### 📋 **Server-Management** 📍 **[→ Server Config](server-config.sh)**
+### 📋 **Server Management** 📍 **[→ Server Config](server-config.sh)**
 
 ```bash
-# Server-Listen anzeigen
+# Show server lists
 ./server-config.sh list development
 ./server-config.sh list preproduction
 ./server-config.sh list production
 
-# Server-Status prüfen
+# Check server status
 ./server-config.sh check production prod-01
-./server-config.sh check preproduction  # Alle Server
+./server-config.sh check preproduction  # All servers
 ```
 
-### 🔐 **Sichere Credential-Verwaltung** 📍 **[→ Vault Management](manage-vault.sh)**
+### 🔐 **Secure Credential Management** 📍 **[→ Vault Management](manage-vault.sh)**
 
 ```bash
-# Vault-Manager starten
+# Start vault manager
 ./manage-vault.sh
 
-# Oder direkt:
-./manage-vault.sh edit production     # Production Credentials
-./manage-vault.sh view preproduction   # Pre-Prod Credentials 
-./manage-vault.sh encrypt development  # Development verschlüsseln
+# Or directly:
+./manage-vault.sh edit production     # Production credentials
+./manage-vault.sh view preproduction   # Pre-prod credentials 
+./manage-vault.sh encrypt development  # Encrypt development
 ```
 
 ---
 
 ## 🆘 Troubleshooting & Support
 
-### 🔍 **Diagnose-Tools**
+### 🔍 **Diagnostic Tools**
 
-#### Status-Checks
+#### Status Checks
 ```bash
-# Haupt-Status Dashboard
-n8n-status                    # SSH-Alias für Status
-./n8n-menu.sh                # Interaktives Menü mit Status
+# Main status dashboard
+n8n-status                    # SSH alias for status
+./n8n-menu.sh                # Interactive menu with status
 
-# Environment-spezifischer Status
-./manage-environments.sh      # Multi-Environment Status
-./server-config.sh check production  # Server-Connectivity
+# Environment-specific status
+./manage-environments.sh      # Multi-environment status
+./server-config.sh check production  # Server connectivity
 ```
 
-#### Log-Analyse 📍 **[→ Log-Management Details](n8n-menu.sh#L85)**
+#### Log Analysis 📍 **[→ Log Management Details](n8n-menu.sh#L85)**
 ```bash
-# Live-Logs
-n8n-logs                     # SSH-Alias für Logs
-sudo ./manage-docker.sh logs  # Docker-Logs
-sudo journalctl -u n8n -f    # systemd-Logs (Native)
+# Live logs
+n8n-logs                     # SSH alias for logs
+sudo ./manage-docker.sh logs  # Docker logs
+sudo journalctl -u n8n -f    # systemd logs (Native)
 
-# Spezifische Logs
-sudo ./manage-docker.sh logs n8n      # n8n Container  
+# Specific logs
+sudo ./manage-docker.sh logs n8n      # n8n container  
 sudo ./manage-docker.sh logs postgres # Database
-tail -f /var/log/nginx/error.log      # nginx Errors
+tail -f /var/log/nginx/error.log      # nginx errors
 ```
 
-### 🔧 **Häufige Probleme & Lösungen**
+### 🔧 **Common Problems & Solutions**
 
-#### Service-Probleme
+#### Service Problems
 ```bash
-# n8n startet nicht
-sudo systemctl status n8n              # Status prüfen
-sudo journalctl -u n8n --since "1 hour ago"  # Logs checken
-./server-config.sh check development local   # Connectivity testen
+# n8n won't start
+sudo systemctl status n8n              # Check status
+sudo journalctl -u n8n --since "1 hour ago"  # Check logs
+./server-config.sh check development local   # Test connectivity
 
-# Docker-Probleme
-sudo ./manage-docker.sh status         # Container Status
+# Docker problems
+sudo ./manage-docker.sh status         # Container status
 sudo docker-compose -f /opt/n8n/docker-compose.yml logs
 ```
 
-#### Netzwerk & SSL
+#### Network & SSL
 ```bash
-# SSL-Zertifikat Probleme
-./manage-domains.sh                    # Domain-Manager
-sudo certbot certificates              # Zertifikate prüfen
-curl -I https://your-domain.com        # SSL-Test
+# SSL certificate problems
+./manage-domains.sh                    # Domain manager
+sudo certbot certificates              # Check certificates
+curl -I https://your-domain.com        # SSL test
 
-# Port-Probleme
-sudo ufw status                        # Firewall prüfen
-sudo netstat -tlnp | grep :5678       # Port-Belegung
+# Port problems
+sudo ufw status                        # Check firewall
+sudo netstat -tlnp | grep :5678       # Port usage
 ```
 
-#### Multi-Environment Probleme 📍 **[→ Environment Troubleshooting](MULTI-ENVIRONMENT.md#support)**
+#### Multi-Environment Problems 📍 **[→ Environment Troubleshooting](MULTI-ENVIRONMENT.md#support)**
 ```bash
-# Ansible-Probleme
+# Ansible problems
 ansible-inventory -i ansible/inventories/production/hosts.yml --list
 ansible-playbook --syntax-check ansible/playbooks/install-n8n-native.yml
 
-# Vault-Probleme
-./manage-vault.sh status              # Vault-Status
+# Vault problems
+./manage-vault.sh status              # Vault status
 ansible-vault view ansible/group_vars/production/vault.yml
 
-# Workflow-Import/Export Probleme
-./export-workflows.sh development --backup  # Mit Backup
-./import-workflows.sh production prod-01 --dry-run  # Test-Modus
+# Workflow import/export problems
+./export-workflows.sh development --backup  # With backup
+./import-workflows.sh production prod-01 --dry-run  # Test mode
 ```
 
-### 📞 **Support-Ressourcen**
+### 📞 **Support Resources**
 
-#### Dokumentation
-- **[📖 Diese README](README.md)** - Hauptdokumentation
+#### Documentation
+- **[📖 This README](README.md)** - Main documentation
 - **[🌍 Multi-Environment Guide](MULTI-ENVIRONMENT.md)** - Development → Production
-- **[🚀 Feature-Übersicht](FEATURES.md)** - Alle Features im Detail
+- **[🚀 Feature Overview](FEATURES.md)** - All features in detail
 
-#### Debug-Informationen sammeln
+#### Debug Information Collection
 ```bash
-# System-Info für Support
+# System info for support
 ./n8n-menu.sh                         # [7] System Information
 ./manage-environments.sh               # [7] Status Dashboard
-./manage-vault.sh status               # Vault-Status
-./server-config.sh check production    # Server-Status
+./manage-vault.sh status               # Vault status
+./server-config.sh check production    # Server status
 ```
 
-#### Quick-Recovery
+#### Quick Recovery
 ```bash
-# Service-Recovery
+# Service recovery
 sudo systemctl restart n8n            # Native restart
 sudo ./manage-docker.sh restart       # Docker restart
 
-# Backup-Recovery (falls verfügbar)
-n8n-restore                           # SSH-Alias
+# Backup recovery (if available)
+n8n-restore                           # SSH alias
 ./restore-n8n.sh /var/backups/n8n/latest.tar.gz
 ```
 
@@ -563,9 +563,9 @@ n8n-restore                           # SSH-Alias
 
 **🚀 Happy n8n Workflow Automation! 🎉**
 
-> Bei Fragen oder Problemen: **[→ Troubleshooting Guide](#-troubleshooting--support)** oder **[→ Multi-Environment Documentation](MULTI-ENVIRONMENT.md)**
+> For questions or problems: **[→ Troubleshooting Guide](#-troubleshooting--support)** or **[→ Multi-Environment Documentation](MULTI-ENVIRONMENT.md)**
 
-### 🎯 **Weitere Navigation**
-- **[📚 Zentrale Navigation (INDEX)](INDEX.md)** - Alle Scripts und Dokumentationen
-- **[🌍 Multi-Environment Guide](MULTI-ENVIRONMENT.md)** - Development → Production Workflow  
-- **[🚀 Feature-Katalog](FEATURES.md)** - Technische Details aller Features
+### 🎯 **Additional Navigation**
+- **[📚 Central Navigation (INDEX)](INDEX.md)** - All scripts and documentation
+- **[🌍 Multi-Environment Guide](MULTI-ENVIRONMENT.md)** - Development → Production workflow  
+- **[🚀 Feature Catalog](FEATURES.md)** - Technical details of all features

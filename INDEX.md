@@ -1,51 +1,51 @@
-# 📚 n8n Suite - Dokumentations-Index
+# 📚 n8n Suite - Documentation Index
 
-> **Zentrale Navigationshilfe zu allen Features, Scripts und Dokumentationen**
+> **Central navigation guide to all features, scripts, and documentation**
 
-## 🎯 **Start hier für...**
+## 🎯 **Start here for...**
 
-### 📥 **Ich möchte n8n installieren**
-- **Einfache Installation**: **[README.md → Installation](README.md#-installation)**
+### 📥 **I want to install n8n**
+- **Simple Installation**: **[README.md → Installation](README.md#-installation)**
 - **Multi-Environment Setup**: **[MULTI-ENVIRONMENT.md → Quick Start](MULTI-ENVIRONMENT.md#quick-start)**
-- **Docker Installation**: **[README.md → Docker-Management](README.md#-docker-verwaltung)**
+- **Docker Installation**: **[README.md → Docker Management](README.md#-docker-management)**
 
-### 🛠️ **Ich möchte Workflows entwickeln**
+### 🛠️ **I want to develop workflows**
 - **Development Environment**: **[setup-development.sh](setup-development.sh)**
-- **Export/Import Workflows**: **[README.md → Workflow-Management](README.md#-workflow-development--multi-environment)**
-- **Git-basierter Workflow**: **[MULTI-ENVIRONMENT.md → Development Workflow](MULTI-ENVIRONMENT.md#workflow-entwicklung--deployment)**
+- **Export/Import Workflows**: **[README.md → Workflow Management](README.md#-workflow-development--multi-environment)**
+- **Git-based Workflow**: **[MULTI-ENVIRONMENT.md → Development Workflow](MULTI-ENVIRONMENT.md#workflow-development--deployment)**
 
-### 🌍 **Ich möchte Multiple Environments verwalten**
+### 🌍 **I want to manage multiple environments**
 - **Environment Manager**: **[manage-environments.sh](manage-environments.sh)**
-- **Server-Konfiguration**: **[server-config.sh](server-config.sh)**
+- **Server Configuration**: **[server-config.sh](server-config.sh)**
 - **Multi-Environment Guide**: **[MULTI-ENVIRONMENT.md](MULTI-ENVIRONMENT.md)**
 
-### 🔐 **Ich möchte Credentials sicher verwalten**
-- **Vault-Manager**: **[manage-vault.sh](manage-vault.sh)**
-- **Sicherheitskonzept**: **[MULTI-ENVIRONMENT.md → Sicherheitskonzept](MULTI-ENVIRONMENT.md#sicherheitskonzept)**
+### 🔐 **I want to manage credentials securely**
+- **Vault Manager**: **[manage-vault.sh](manage-vault.sh)**
+- **Security Concept**: **[MULTI-ENVIRONMENT.md → Security Concept](MULTI-ENVIRONMENT.md#security-concept)**
 
-### 🆘 **Ich habe Probleme**
+### 🆘 **I have problems**
 - **Troubleshooting**: **[README.md → Troubleshooting](README.md#-troubleshooting--support)**
-- **Service-Probleme**: **[README.md → Service-Befehle](README.md#-service-befehle)**
-- **Docker-Probleme**: **[manage-docker.sh](manage-docker.sh)**
+- **Service Problems**: **[README.md → Service Commands](README.md#-service-commands)**
+- **Docker Problems**: **[manage-docker.sh](manage-docker.sh)**
 
 ---
 
-## 📋 **Vollständige Script-Referenz**
+## 📋 **Complete Script Reference**
 
 ### 🎯 **Installation & Setup**
-| Script | Zweck | Quick Access | Dokumentation |
-|--------|-------|-------------|---------------|
-| **[install-n8n.sh](install-n8n.sh)** | Haupt-Installation | `sudo ./install-n8n.sh <domain>` | **[→ Guide](README.md#-installation)** |
-| **[setup-ssh-user.sh](setup-ssh-user.sh)** | SSH-Benutzer Setup | Automatisch bei Installation | **[→ SSH-Setup](README.md#%EF%B8%8F-ssh-management-setup)** |
-| **[setup-reverse-proxy.sh](setup-reverse-proxy.sh)** | Zusätzliche Domains | `sudo ./setup-reverse-proxy.sh <domain>` | **[→ Domain-Management](manage-domains.sh)** |
-| **[setup-development.sh](setup-development.sh)** | Dev-Environment | `./setup-development.sh <name> <env>` | **[→ Development Guide](MULTI-ENVIRONMENT.md#lokale-n8n-entwicklung)** |
+| Script | Purpose | Quick Access | Documentation |
+|--------|---------|-------------|---------------|
+| **[install-n8n.sh](install-n8n.sh)** | Main installation | `sudo ./install-n8n.sh <domain>` | **[→ Guide](README.md#-installation)** |
+| **[setup-ssh-user.sh](setup-ssh-user.sh)** | SSH user setup | Automatic during installation | **[→ SSH Setup](README.md#%EF%B8%8F-ssh-management-setup)** |
+| **[setup-reverse-proxy.sh](setup-reverse-proxy.sh)** | Additional domains | `sudo ./setup-reverse-proxy.sh <domain>` | **[→ Domain Management](manage-domains.sh)** |
+| **[setup-development.sh](setup-development.sh)** | Dev environment | `./setup-development.sh <name> <env>` | **[→ Development Guide](MULTI-ENVIRONMENT.md#local-n8n-development)** |
 
 ### 🌍 **Environment Management**
-| Script | Zweck | Quick Access | Dokumentation |
-|--------|-------|-------------|---------------|
-| **[manage-environments.sh](manage-environments.sh)** | Multi-Environment Manager | `./manage-environments.sh` | **[→ Environment Guide](MULTI-ENVIRONMENT.md)** |
-| **[server-config.sh](server-config.sh)** | Server-Listen verwalten | `./server-config.sh list <env>` | **[→ Server-Management](MULTI-ENVIRONMENT.md#server-management)** |
-| **[manage-vault.sh](manage-vault.sh)** | Credential-Verwaltung | `./manage-vault.sh` | **[→ Vault Guide](MULTI-ENVIRONMENT.md#sichere-credential-verwaltung)** |
+| Script | Purpose | Quick Access | Documentation |
+|--------|---------|-------------|---------------|
+| **[manage-environments.sh](manage-environments.sh)** | Multi-environment manager | `./manage-environments.sh` | **[→ Environment Guide](MULTI-ENVIRONMENT.md)** |
+| **[server-config.sh](server-config.sh)** | Manage server lists | `./server-config.sh list <env>` | **[→ Server Management](MULTI-ENVIRONMENT.md#server-management)** |
+| **[manage-vault.sh](manage-vault.sh)** | Credential management | `./manage-vault.sh` | **[→ Vault Guide](MULTI-ENVIRONMENT.md#secure-credential-management)** |
 
 ### 📦 **Workflow-Pipeline**
 | Script | Zweck | Quick Access | Dokumentation |
