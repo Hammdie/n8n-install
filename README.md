@@ -28,7 +28,6 @@ A comprehensive, production-ready n8n installation and management suite designed
 
 📖 **[Complete Documentation](documentation/)** - Detailed guides and setup instructions
 🔧 **[Installation Scripts](scripts/)** - All management and deployment tools
-🛠️ **[Development Resources](development/)** - Development environments and tools
 
 ## Quick Start
 
@@ -52,7 +51,6 @@ sudo ./scripts/deployment/install-n8n.sh
 | [🏗️ **Features Overview**](documentation/FEATURES.md) | Technical specifications and capabilities |
 | [🌍 **Multi-Environment**](documentation/MULTI-ENVIRONMENT.md) | Professional development workflow guide |
 | [📋 **Navigation Index**](documentation/INDEX.md) | Quick navigation to all features and scripts |
-| [🤖 **AI Assistant Notes**](documentation/CLAUDE.md) | Context for AI assistants working with this suite |
 
 ## Architecture Highlights
 
@@ -90,6 +88,8 @@ sudo ./scripts/deployment/install-n8n.sh
 
 ## Development Workflow
 
+The suite supports a complete development-to-production pipeline:
+
 ```mermaid
 graph LR
     A[Local Development] --> B[Export Workflows]
@@ -100,11 +100,12 @@ graph LR
     F --> G[Monitor & Backup]
 ```
 
+Use `./scripts/deployment/setup-development.sh` to create isolated development environments.
+
 ## Support & Contributing
 
 - **Issues**: Report bugs and feature requests
 - **Documentation**: Comprehensive guides in [documentation/](documentation/)
-- **Development**: Use [development/](development/) for custom extensions
 
 ## License
 
