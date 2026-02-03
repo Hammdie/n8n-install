@@ -4,11 +4,12 @@ Dieses Repository enthält Shell-Skripte zur automatischen Installation und Verw
 
 ## 📋 Inhalt
 
-- `install-n8n.sh` - Vollständige n8n-Installation
+- `install-n8n.sh` - Vollständige n8n-Installation (Native oder Docker)
 - `setup-ssh-user.sh` - SSH-Zugang für odoo-Benutzer konfigurieren
 - `setup-reverse-proxy.sh` - Zusätzliche Domains mit Reverse Proxy
 - `n8n-menu.sh` - Hauptverwaltungsmenü mit allen Optionen
 - `manage-domains.sh` - Domain-Management und SSL-Verwaltung
+- `manage-docker.sh` - Docker Compose Verwaltung
 - `backup-n8n.sh` - Backup-Skript für n8n
 - `restore-n8n.sh` - Restore-Skript für n8n
 - `update-n8n.sh` - Update-Skript für n8n
@@ -22,12 +23,16 @@ Dieses Repository enthält Shell-Skripte zur automatischen Installation und Verw
 wget https://raw.githubusercontent.com/username/n8n-install/main/install-n8n.sh
 chmod +x install-n8n.sh
 
-# Installation starten (mit Domain)
+# Installation starten (wird nach Installationsmethode gefragt)
 sudo ./install-n8n.sh your-domain.com admin@your-domain.com
 
 # Oder für lokale Installation
 sudo ./install-n8n.sh localhost
 ```
+
+**Installationsoptionen während der Installation:**
+1. **Native Installation** - Node.js + PostgreSQL direkt auf dem System
+2. **Docker Compose Installation** - Containerisierte Lösung mit Docker
 
 ### 2. SSH-User odoo einrichten
 
@@ -60,16 +65,17 @@ sudo ./n8n-menu.sh
 ## 🔧 Was wird installiert?
 
 ### System-Komponenten
-- Node.js 18.x
-- PostgreSQL mit konfigurierter Datenbank
+- **Native**: Node.js 18.x, PostgreSQL
+- **Docker**: Docker CE, Docker Compose
 - nginx als Reverse Proxy
 - SSL-Zertifikate via Let's Encrypt (bei Domain-Installation)
 - UFW Firewall-Konfiguration
 
 ### n8n-Konfiguration
-- Systemd Service für automatischen Start
+- **Native**: Systemd Service für automatischen Start
+- **Docker**: Docker Compose Services mit Health Checks
 - PostgreSQL-Datenbank-Integration
-- Sichere Umgebungsvariablen
+- Sichere Encryption Key Verwaltung in `/var/n8n/`
 - Logging-Konfiguration
 - Webhook-Support
 
@@ -81,11 +87,29 @@ sudo ./n8n-menu.sh
 
 ## 📁 Verzeichnisstruktur
 
+### Native Installation
 ```
 /home/n8n/n8n/          # n8n Arbeitsverzeichnis
 ├── .env                # Umgebungsvariablen
 ├── logs/               # Log-Dateien
 └── ...
+```
+
+### Docker Installation
+```
+/opt/n8n/               # Docker Compose Verzeichnis
+├── docker-compose.yml  # Docker Services
+└── .env                # Umgebungsvariablen
+
+# Docker Volumes
+n8n_data                # n8n Anwendungsdaten
+postgres_data           # PostgreSQL Datenbank
+```
+
+### Gemeinsam
+```
+/var/n8n/               # Encryption Key Speicher
+└── encryption.key      # Sichere Schlüsseldatei
 
 /home/odoo/             # SSH-Benutzer Verzeichnis
 ├── n8n-status.sh      # Status-Dashboard
@@ -108,6 +132,7 @@ n8n-status    # Status anzeigen
 n8n-manage    # Management-Menü
 n8n-menu      # Hauptverwaltungsmenü
 n8n-domains   # Domain-Management
+n8n-docker    # Docker-Verwaltung (nur bei Docker-Installation)
 n8n-logs      # Live-Logs anzeigen
 n8n-start     # n8n starten
 n8n-stop      # n8n stoppen
@@ -149,15 +174,70 @@ sudo ./restore-n8n.sh 20240202_143000
 
 ## 🔄 Updates
 
+### Native Installation
 ```bash
 # n8n auf neueste Version aktualisieren
 sudo ./update-n8n.sh
+```
+
+### Docker Installation
+```bash
+# Docker Images aktualisieren
+sudo ./manage-docker.sh update
+```
+
+## 🐳 Docker-Verwaltung
+
+### Docker-Management-Befehle
+
+```bash
+# Status anzeigen
+sudo ./manage-docker.sh status
+
+# Services starten/stoppen
+sudo ./manage-docker.sh start
+sudo ./manage-docker.sh stop
+sudo ./manage-docker.sh restart
+
+# Logs anzeigen
+sudo ./manage-docker.sh logs
+sudo ./manage-docker.sh logs n8n
+sudo ./manage-docker.sh logs postgres
+
+# Container Shell öffnen
+sudo ./manage-docker.sh shell n8n
+sudo ./manage-docker.sh shell postgres
+
+# Docker Images aktualisieren
+sudo ./manage-docker.sh update
+
+# Backup erstellen
+sudo ./manage-docker.sh backup
+
+# System aufräumen
+sudo ./manage-docker.sh cleanup
+```
+
+### Docker Compose Direktbefehle
+
+```bash
+# Im Docker-Verzeichnis
+cd /opt/n8n
+
+# Services verwalten
+docker compose ps              # Status anzeigen
+docker compose logs -f         # Logs verfolgen
+docker compose up -d           # Services starten
+docker compose down            # Services stoppen
+docker compose restart         # Services neustarten
+docker compose pull            # Images aktualisieren
 ```
 
 ## 🛠️ Verwaltung
 
 ### Service-Befehle
 
+#### Native Installation
 ```bash
 # Status prüfen
 sudo systemctl status n8n
@@ -171,8 +251,23 @@ sudo systemctl stop n8n
 sudo systemctl restart n8n
 ```
 
+#### Docker Installation
+```bash
+# Status prüfen
+sudo ./manage-docker.sh status
+
+# Logs anzeigen
+sudo ./manage-docker.sh logs
+
+# Service-Verwaltung
+sudo ./manage-docker.sh start
+sudo ./manage-docker.sh stop
+sudo ./manage-docker.sh restart
+```
+
 ### Konfiguration
 
+#### Native Installation
 Die Hauptkonfiguration befindet sich in `/home/n8n/n8n/.env`:
 
 ```bash
@@ -181,6 +276,17 @@ sudo nano /home/n8n/n8n/.env
 
 # Service nach Änderungen neustarten
 sudo systemctl restart n8n
+```
+
+#### Docker Installation
+Die Konfiguration befindet sich in `/opt/n8n/.env`:
+
+```bash
+# Konfiguration bearbeiten
+sudo nano /opt/n8n/.env
+
+# Services nach Änderungen neustarten
+sudo ./manage-docker.sh restart
 ```
 
 ## 🌐 Zugriff
