@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # n8n Workflow Import Script
-# Importiert Workflows und Credentials auf Zielserver via Ansible
+# Imports workflows and credentials to target server via Ansible
 
 set -e
 
@@ -16,22 +16,22 @@ error() { echo -e "${RED}[ERROR] $1${NC}"; exit 1; }
 warning() { echo -e "${YELLOW}[WARNING] $1${NC}"; }
 info() { echo -e "${BLUE}[INFO] $1${NC}"; }
 
-# Parameter prüfen
+# Check parameters
 if [ "$#" -lt 2 ]; then
     echo "n8n Import Script"
     echo ""
-    echo "Verwendung: $0 <environment> <target> [optionen]"
+    echo "Usage: $0 <environment> <target> [options]"
     echo ""
-    echo "Umgebungen: development, staging, production"
-    echo "Target:     Server-Name aus Ansible Inventory oder 'local'"
+    echo "Environments: development, staging, production"
+    echo "Target:       Server name from Ansible inventory or 'local'"
     echo ""
-    echo "Optionen:"
-    echo "  --workflows-only    Nur Workflows importieren"
-    echo "  --credentials-only  Nur Credentials importieren"
-    echo "  --dry-run          Nur Validierung, kein Import"
-    echo "  --force            Überschreibe existierende Workflows"
+    echo "Options:"
+    echo "  --workflows-only    Import workflows only"
+    echo "  --credentials-only  Import credentials only"
+    echo "  --dry-run          Validation only, no import"
+    echo "  --force            Overwrite existing workflows"
     echo ""
-    echo "Beispiele:"
+    echo "Examples:"
     echo "  $0 production n8n-prod-01"
     echo "  $0 staging n8n-staging-01 --workflows-only"
     echo "  $0 development local --dry-run"
@@ -47,7 +47,7 @@ IMPORT_CREDENTIALS=true
 DRY_RUN=false
 FORCE_IMPORT=false
 
-# Optionen parsen
+# Parse options
 for arg in "${@:3}"; do
     case $arg in
         --workflows-only)
@@ -67,7 +67,7 @@ done
 
 echo ""
 echo "=============================================="
-echo "📥 n8n Import für $ENVIRONMENT -> $TARGET"
+echo "📥 n8n Import for $ENVIRONMENT -> $TARGET"
 echo "=============================================="
 echo ""
 echo "Workflows: $([ "$IMPORT_WORKFLOWS" = true ] && echo "✅" || echo "❌")"
@@ -76,7 +76,7 @@ echo "Dry Run: $([ "$DRY_RUN" = true ] && echo "✅" || echo "❌")"
 echo "Force: $([ "$FORCE_IMPORT" = true ] && echo "✅" || echo "❌")"
 echo ""
 
-# Ansible Inventory prüfen
+# Check Ansible inventory
 INVENTORY_FILE="ansible/inventories/$ENVIRONMENT/hosts.yml"
 if [ ! -f "$INVENTORY_FILE" ]; then
     error "Ansible Inventory nicht gefunden: $INVENTORY_FILE"

@@ -5,7 +5,7 @@
 
 set -e
 
-# Farben
+# Colors
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
@@ -14,12 +14,12 @@ CYAN='\033[0;36m'
 PURPLE='\033[0;35m'
 NC='\033[0m'
 
-# Konfiguration
+# Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 N8N_USER="n8n"
 N8N_DIR="/home/$N8N_USER/n8n"
 
-# Hilfsfunktionen
+# Helper functions
 log() {
     echo -e "${GREEN}[$(date +'%Y-%m-%d %H:%M:%S')] $1${NC}"
 }
@@ -77,7 +77,7 @@ show_system_status() {
         echo -e "PostgreSQL:  ${RED}●${NC} Stopped"
     fi
     
-    # Speicher und Load
+    # Memory and Load
     echo -e "Load Average: ${YELLOW}$(uptime | awk -F'load average:' '{print $2}' | xargs)${NC}"
     echo -e "Freier RAM:   ${YELLOW}$(free -h | awk '/^Mem:/ {print $7}')${NC}"
     echo ""

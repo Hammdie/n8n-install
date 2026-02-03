@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # n8n Workflow Export Script
-# Exportiert Workflows und Credentials aus n8n für Git-Versionierung
+# Exports workflows and credentials from n8n for Git versioning
 
 set -e
 
@@ -16,9 +16,9 @@ error() { echo -e "${RED}[ERROR] $1${NC}"; exit 1; }
 warning() { echo -e "${YELLOW}[WARNING] $1${NC}"; }
 info() { echo -e "${BLUE}[INFO] $1${NC}"; }
 
-# Parameter prüfen
+# Check parameters
 if [ "$#" -lt 1 ]; then
-    error "Verwendung: $0 <environment> [n8n-host] [options]"
+    error "Usage: $0 <environment> [n8n-host] [options]"
 fi
 
 ENVIRONMENT="$1"
@@ -31,7 +31,7 @@ EXPORT_WORKFLOWS=true
 EXPORT_CREDENTIALS=true
 CREATE_BACKUP=false
 
-# Optionen parsen
+# Parse options
 for arg in "${@:3}"; do
     case $arg in
         --workflows-only)
@@ -46,19 +46,19 @@ for arg in "${@:3}"; do
         --help)
             echo "n8n Export Script"
             echo ""
-            echo "Verwendung: $0 <environment> [host] [optionen]"
+            echo "Usage: $0 <environment> [host] [options]"
             echo ""
-            echo "Umgebungen: development, staging, production"
-            echo "Host:       Standard ist localhost:5678"
+            echo "Environments: development, staging, production"
+            echo "Host:         Default is localhost:5678"
             echo ""
-            echo "Optionen:"
-            echo "  --workflows-only    Nur Workflows exportieren"
-            echo "  --credentials-only  Nur Credentials exportieren"
-            echo "  --backup           Backup vor Export erstellen"
+            echo "Options:"
+            echo "  --workflows-only    Export workflows only"
+            echo "  --credentials-only  Export credentials only"
+            echo "  --backup           Create backup before export"
             echo ""
             echo "Environment Variables:"
-            echo "  N8N_USER           n8n Benutzername (Standard: admin)"
-            echo "  N8N_PASSWORD       n8n Passwort (Standard: admin123)"
+            echo "  N8N_USER           n8n username (default: admin)"
+            echo "  N8N_PASSWORD       n8n password (default: admin123)"
             echo ""
             exit 0
             ;;
@@ -67,7 +67,7 @@ done
 
 echo ""
 echo "=============================================="
-echo "📦 n8n Export für $ENVIRONMENT"
+echo "📦 n8n Export for $ENVIRONMENT"
 echo "=============================================="
 echo ""
 echo "Host: $N8N_HOST"
@@ -75,7 +75,7 @@ echo "Workflows: $([ "$EXPORT_WORKFLOWS" = true ] && echo "✅" || echo "❌")"
 echo "Credentials: $([ "$EXPORT_CREDENTIALS" = true ] && echo "✅" || echo "❌")"
 echo ""
 
-# Verzeichnisse prüfen
+# Check directories
 WORKFLOWS_DIR="workflows/$ENVIRONMENT"
 CREDENTIALS_DIR="credentials/$ENVIRONMENT"
 

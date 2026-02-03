@@ -249,29 +249,29 @@ if ! id "$N8N_USER" &>/dev/null; then
     usermod -aG sudo "$N8N_USER"
 fi
 
-# n8n global installieren
-log "Installiere n8n..."
+# Install n8n globally
+log "Installing n8n..."
 npm install -g n8n
 
-# Erstelle n8n Verzeichnisse
-log "Erstelle n8n Verzeichnisse..."
+# Create n8n directories
+log "Creating n8n directories..."
 mkdir -p "$N8N_DIR"
 chown -R "$N8N_USER:$N8N_USER" "$N8N_HOME"
 
-# n8n Konfigurationsdatei erstellen
-log "Erstelle n8n Konfiguration..."
+# Create n8n configuration file
+log "Creating n8n configuration..."
 cat > "$N8N_DIR/.env" << EOF
-# n8n Konfiguration
+# n8n Configuration
 N8N_BASIC_AUTH_ACTIVE=false
 N8N_HOST=0.0.0.0
 N8N_PORT=5678
 N8N_PROTOCOL=https
 N8N_EDITOR_BASE_URL=https://$DOMAIN_NAME/
 
-# Webhook-Konfiguration
+# Webhook configuration
 WEBHOOK_URL=https://$DOMAIN_NAME/
 
-# Datenbank-Konfiguration (PostgreSQL)
+# Database configuration (PostgreSQL)
 DB_TYPE=postgresdb
 DB_POSTGRESDB_HOST=localhost
 DB_POSTGRESDB_PORT=5432
@@ -279,7 +279,7 @@ DB_POSTGRESDB_DATABASE=$POSTGRES_DB
 DB_POSTGRESDB_USER=$POSTGRES_USER
 DB_POSTGRESDB_PASSWORD=$POSTGRES_PASSWORD
 
-# Sicherheit
+# Security
 N8N_ENCRYPTION_KEY=$N8N_ENCRYPTION_KEY
 
 # Logging
@@ -291,11 +291,11 @@ N8N_LOG_FILE_LOCATION=$N8N_DIR/logs/
 N8N_PAYLOAD_SIZE_MAX=16777216
 N8N_METRICS=true
 
-# Benutzer-Authentifizierung (optional)
+# User authentication (optional)
 # N8N_USER_MANAGEMENT_DISABLED=false
 # N8N_USER_MANAGEMENT_JWT_SECRET=$(openssl rand -base64 32)
 
-# E-Mail Konfiguration (für Benutzer-Management)
+# Email configuration (for user management)
 # N8N_EMAIL_MODE=smtp
 # N8N_SMTP_HOST=your-smtp-host
 # N8N_SMTP_PORT=587
@@ -304,12 +304,12 @@ N8N_METRICS=true
 # N8N_SMTP_SENDER=your-email@domain.com
 EOF
 
-# Logs-Verzeichnis erstellen
+# Create logs directory
 mkdir -p "$N8N_DIR/logs"
 chown -R "$N8N_USER:$N8N_USER" "$N8N_DIR"
 
-# Systemd Service für n8n erstellen
-log "Erstelle systemd Service..."
+# Create systemd service for n8n
+log "Creating systemd service..."
 cat > /etc/systemd/system/n8n.service << EOF
 [Unit]
 Description=n8n workflow automation tool
@@ -327,7 +327,7 @@ Environment=NODE_ENV=production
 EnvironmentFile=$N8N_DIR/.env
 WorkingDirectory=$N8N_DIR
 
-# Sicherheitseinstellungen
+# Security settings
 NoNewPrivileges=true
 ProtectSystem=strict
 ProtectHome=true
@@ -338,8 +338,8 @@ PrivateTmp=true
 WantedBy=multi-user.target
 EOF
 
-# Nginx Konfiguration
-log "Konfiguriere nginx..."
+# Nginx configuration
+log "Configuring nginx..."
 cat > /etc/nginx/sites-available/n8n << EOF
 server {
     listen 80;
@@ -402,34 +402,34 @@ server {
 }
 EOF
 
-# Nginx Site aktivieren
+# Activate nginx site
 ln -sf /etc/nginx/sites-available/n8n /etc/nginx/sites-enabled/
 rm -f /etc/nginx/sites-enabled/default
 
-# Nginx Konfiguration testen
-nginx -t || error "Nginx Konfiguration fehlerhaft"
+# Test nginx configuration
+nginx -t || error "Nginx configuration invalid"
 
-# Services starten und aktivieren
-log "Starte Services..."
+# Start and enable services
+log "Starting services..."
 systemctl daemon-reload
 systemctl enable n8n
 systemctl restart nginx
 
-# SSL-Zertifikat mit Certbot (nur wenn nicht localhost)
+# SSL certificate with Certbot (only if not localhost)
 if [[ "$DOMAIN_NAME" != "localhost" ]]; then
-    log "Erstelle SSL-Zertifikat für $DOMAIN_NAME..."
-    certbot --nginx -d "$DOMAIN_NAME" --non-interactive --agree-tos --email "$EMAIL" || warning "SSL-Zertifikat konnte nicht erstellt werden"
+    log "Creating SSL certificate for $DOMAIN_NAME..."
+    certbot --nginx -d "$DOMAIN_NAME" --non-interactive --agree-tos --email "$EMAIL" || warning "SSL certificate could not be created"
 fi
 
-# n8n starten
-log "Starte n8n..."
+# Start n8n
+log "Starting n8n..."
 systemctl start n8n
 }
 
-# Post-Installation Konfiguration
+# Post-installation configuration
 post_install_config() {
-    # Firewall konfigurieren (UFW)
-    log "Konfiguriere Firewall..."
+    # Configure firewall (UFW)
+    log "Configuring firewall..."
     if command -v ufw &> /dev/null; then
         ufw --force enable
         ufw allow ssh
@@ -437,21 +437,21 @@ post_install_config() {
         ufw status
     fi
 
-    # SSL-Zertifikat mit Certbot (nur wenn nicht localhost und Docker)
+    # SSL certificate with Certbot (only if not localhost and Docker)
     if [[ "$DOMAIN_NAME" != "localhost" && "$INSTALL_TYPE" == "docker" ]]; then
-        log "Erstelle SSL-Zertifikat für $DOMAIN_NAME..."
-        certbot --nginx -d "$DOMAIN_NAME" --non-interactive --agree-tos --email "$EMAIL" || warning "SSL-Zertifikat konnte nicht erstellt werden"
+        log "Creating SSL certificate for $DOMAIN_NAME..."
+        certbot --nginx -d "$DOMAIN_NAME" --non-interactive --agree-tos --email "$EMAIL" || warning "SSL certificate could not be created"
     fi
 
-    # Informationen ausgeben
-    log "Installation abgeschlossen!"
+    # Output information
+    log "Installation completed!"
     echo ""
     echo -e "${GREEN}===============================================${NC}"
-    echo -e "${GREEN}n8n Installation erfolgreich abgeschlossen!${NC}"
+    echo -e "${GREEN}n8n Installation completed successfully!${NC}"
     echo -e "${GREEN}===============================================${NC}"
     echo ""
-    echo -e "${YELLOW}Installationstyp:${NC} $INSTALL_TYPE"
-    echo -e "${YELLOW}Zugriff:${NC}"
+    echo -e "${YELLOW}Installation type:${NC} $INSTALL_TYPE"
+    echo -e "${YELLOW}Access:${NC}"
     if [[ "$DOMAIN_NAME" != "localhost" ]]; then
         echo -e "  URL: ${GREEN}https://$DOMAIN_NAME${NC}"
     else
@@ -460,32 +460,32 @@ post_install_config() {
     echo ""
     
     if [[ "$INSTALL_TYPE" == "docker" ]]; then
-        echo -e "${YELLOW}Docker Befehle:${NC}"
-        echo -e "  Status prüfen:    ${GREEN}cd /opt/n8n && docker compose ps${NC}"
-        echo -e "  Logs anzeigen:    ${GREEN}cd /opt/n8n && docker compose logs -f${NC}"
-        echo -e "  Stoppen:          ${GREEN}cd /opt/n8n && docker compose down${NC}"
-        echo -e "  Starten:          ${GREEN}cd /opt/n8n && docker compose up -d${NC}"
-        echo -e "  Neustarten:       ${GREEN}cd /opt/n8n && docker compose restart${NC}"
+        echo -e "${YELLOW}Docker commands:${NC}"
+        echo -e "  Check status:     ${GREEN}cd /opt/n8n && docker compose ps${NC}"
+        echo -e "  Show logs:        ${GREEN}cd /opt/n8n && docker compose logs -f${NC}"
+        echo -e "  Stop:             ${GREEN}cd /opt/n8n && docker compose down${NC}"
+        echo -e "  Start:            ${GREEN}cd /opt/n8n && docker compose up -d${NC}"
+        echo -e "  Restart:          ${GREEN}cd /opt/n8n && docker compose restart${NC}"
     else
-        echo -e "${YELLOW}Datenbank-Details:${NC}"
+        echo -e "${YELLOW}Database details:${NC}"
         echo -e "  Host: localhost"
         echo -e "  Database: $POSTGRES_DB"
         echo -e "  User: $POSTGRES_USER"
         echo -e "  Password: $POSTGRES_PASSWORD"
         echo ""
-        echo -e "${YELLOW}Wichtige Befehle:${NC}"
-        echo -e "  Status prüfen:    ${GREEN}systemctl status n8n${NC}"
-        echo -e "  Logs anzeigen:    ${GREEN}journalctl -u n8n -f${NC}"
-        echo -e "  n8n stoppen:      ${GREEN}systemctl stop n8n${NC}"
-        echo -e "  n8n starten:      ${GREEN}systemctl start n8n${NC}"
-        echo -e "  n8n neustarten:   ${GREEN}systemctl restart n8n${NC}"
+        echo -e "${YELLOW}Important commands:${NC}"
+        echo -e "  Check status:     ${GREEN}systemctl status n8n${NC}"
+        echo -e "  Show logs:        ${GREEN}journalctl -u n8n -f${NC}"
+        echo -e "  Stop n8n:         ${GREEN}systemctl stop n8n${NC}"
+        echo -e "  Start n8n:        ${GREEN}systemctl start n8n${NC}"
+        echo -e "  Restart n8n:      ${GREEN}systemctl restart n8n${NC}"
         echo ""
-        echo -e "${YELLOW}Konfigurationsdatei:${NC} $N8N_DIR/.env"
+        echo -e "${YELLOW}Configuration file:${NC} $N8N_DIR/.env"
     fi
     echo ""
-    echo -e "${YELLOW}Hinweis:${NC} Beim ersten Zugriff müssen Sie einen Admin-Benutzer erstellen."
+    echo -e "${YELLOW}Note:${NC} On first access you need to create an admin user."
 
-    # Passwort in separater Datei speichern
+    # Save password in separate file
     if [[ "$INSTALL_TYPE" == "docker" ]]; then
         echo "INSTALL_TYPE=docker" > /root/n8n-db-credentials.txt
         echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> /root/n8n-db-credentials.txt
@@ -497,11 +497,11 @@ post_install_config() {
         echo "N8N_ENCRYPTION_KEY_FILE=$N8N_KEY_FILE" >> /root/n8n-db-credentials.txt
     fi
     chmod 600 /root/n8n-db-credentials.txt
-    echo -e "${YELLOW}Installation-Details wurden in /root/n8n-db-credentials.txt gespeichert${NC}"
-    echo -e "${YELLOW}Encryption Key wurde dauerhaft in $N8N_KEY_FILE gespeichert${NC}"
+    echo -e "${YELLOW}Installation details saved in /root/n8n-db-credentials.txt${NC}"
+    echo -e "${YELLOW}Encryption key permanently saved in $N8N_KEY_FILE${NC}"
 }
 
-# Docker Compose Konfiguration erstellen
+# Create Docker Compose configuration
 create_docker_compose() {
     cat > "$N8N_DOCKER_DIR/docker-compose.yml" << EOF
 version: '3.8'
@@ -579,9 +579,9 @@ EOF
     chmod 600 "$N8N_DOCKER_DIR/.env"
 }
 
-# nginx Konfiguration für Docker
+# nginx configuration for Docker
 configure_nginx_docker() {
-    log "Konfiguriere nginx für Docker..."
+    log "Configuring nginx for Docker..."
     cat > /etc/nginx/sites-available/n8n << EOF
 server {
     listen 80;
@@ -644,13 +644,13 @@ server {
 }
 EOF
 
-    # Nginx Site aktivieren
+    # Activate nginx site
     ln -sf /etc/nginx/sites-available/n8n /etc/nginx/sites-enabled/
     rm -f /etc/nginx/sites-enabled/default
 
-    # Nginx Konfiguration testen
-    nginx -t || error "Nginx Konfiguration fehlerhaft"
+    # Test nginx configuration
+    nginx -t || error "Nginx configuration invalid"
 
-    # nginx neuladen
+    # reload nginx
     systemctl restart nginx
 }

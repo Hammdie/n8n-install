@@ -97,16 +97,16 @@ show_environment_menu() {
     esac
     
     echo ""
-    echo -e "${BLUE}Aktionen:${NC}"
+    echo -e "${BLUE}Actions:${NC}"
     echo ""
-    echo -e "[1] 🚀 n8n installieren"
-    echo -e "[2] 📤 Workflows exportieren"  
-    echo -e "[3] 📥 Workflows importieren"
-    echo -e "[4] 🔄 Update durchführen"
-    echo -e "[5] 💾 Backup erstellen"
-    echo -e "[6] 📊 Status prüfen"
-    echo -e "[7] 🔧 Server-Konfiguration" 
-    echo -e "[0] ⬅️  Zurück"
+    echo -e "[1] 🚀 Install n8n"
+    echo -e "[2] 📤 Export workflows"  
+    echo -e "[3] 📥 Import workflows"
+    echo -e "[4] 🔄 Perform update"
+    echo -e "[5] 💾 Create backup"
+    echo -e "[6] 📊 Check status"
+    echo -e "[7] 🔧 Server configuration" 
+    echo -e "[0] ⬅️  Back"
     echo ""
 }
 
@@ -114,21 +114,21 @@ handle_installation() {
     local env="$1"
     
     echo ""
-    echo -e "${BLUE}🚀 n8n Installation für $env${NC}"
+    echo -e "${BLUE}🚀 n8n Installation for $env${NC}"
     echo ""
     
-    # Server-Auswahl
-    echo "Verfügbare Server:"
+    # Server selection
+    echo "Available servers:"
     local servers_var="${env^^}_SERVERS[@]"
     local servers=("${!servers_var}")
     
-    select server in "${!servers[@]}" "Alle Server" "Abbrechen"; do
+    select server in "${!servers[@]}" "All servers" "Cancel"; do
         case $server in
-            "Abbrechen")
+            "Cancel")
                 return
                 ;;
-            "Alle Server")
-                log "Installation auf allen Servern wird gestartet..."
+            "All servers")
+                log "Installation on all servers will be started..."
                 for srv in "${!servers[@]}"; do
                     install_n8n_on_server "$env" "$srv" "${servers[$srv]}"
                 done
