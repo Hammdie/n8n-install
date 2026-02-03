@@ -367,7 +367,7 @@ ansible -i ansible/inventories/production/hosts.yml \
 ### Komplettes Setup in 5 Minuten
 ```bash
 # 1. Klone Repository
-git clone https://github.com/username/n8n-install.git
+git clone https://github.com/Hammdie/n8n-install.git
 cd n8n-install
 
 # 2. Development Environment erstellen

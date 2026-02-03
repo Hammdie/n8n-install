@@ -351,7 +351,7 @@ create_ansible_playbooks() {
   tasks:
     - name: Download and execute n8n installation script
       shell: |
-        wget -O /tmp/install-n8n.sh https://raw.githubusercontent.com/your-repo/n8n-install/main/install-n8n.sh
+        wget -O /tmp/install-n8n.sh https://raw.githubusercontent.com/Hammdie/n8n-install/main/install-n8n.sh
         chmod +x /tmp/install-n8n.sh
         /tmp/install-n8n.sh {{ n8n_domain }} {{ n8n_ssl_email | default('') }}
       environment:
@@ -359,7 +359,7 @@ create_ansible_playbooks() {
         
     - name: Setup SSH user with n8n access
       shell: |
-        wget -O /tmp/setup-ssh-user.sh https://raw.githubusercontent.com/your-repo/n8n-install/main/setup-ssh-user.sh
+        wget -O /tmp/setup-ssh-user.sh https://raw.githubusercontent.com/Hammdie/n8n-install/main/setup-ssh-user.sh
         chmod +x /tmp/setup-ssh-user.sh  
         /tmp/setup-ssh-user.sh
         
@@ -380,7 +380,7 @@ EOF
   tasks:
     - name: Download and execute n8n installation script
       shell: |
-        wget -O /tmp/install-n8n.sh https://raw.githubusercontent.com/your-repo/n8n-install/main/install-n8n.sh
+        wget -O /tmp/install-n8n.sh https://raw.githubusercontent.com/Hammdie/n8n-install/main/install-n8n.sh
         chmod +x /tmp/install-n8n.sh
         /tmp/install-n8n.sh {{ n8n_domain }} {{ n8n_ssl_email | default('') }}
       environment:
@@ -388,7 +388,7 @@ EOF
         
     - name: Setup SSH user with docker access
       shell: |
-        wget -O /tmp/setup-ssh-user.sh https://raw.githubusercontent.com/your-repo/n8n-install/main/setup-ssh-user.sh
+        wget -O /tmp/setup-ssh-user.sh https://raw.githubusercontent.com/Hammdie/n8n-install/main/setup-ssh-user.sh
         chmod +x /tmp/setup-ssh-user.sh
         /tmp/setup-ssh-user.sh
         
