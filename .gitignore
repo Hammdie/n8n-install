@@ -2,6 +2,7 @@
 development/
 CLAUDE.md
 documentation/CLAUDE.md
+.github/copilot-instructions.md
 
 # IDE and editor files
 .vscode/

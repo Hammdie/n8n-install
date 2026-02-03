@@ -33,30 +33,30 @@
 ### 🛠️ **Management Tools** 
 | Tool | Purpose | Quick Launch |
 |------|---------|-------------|
-| **[🌐 Multi-Environment Manager](manage-environments.sh)** | Central Environment Management | `./manage-environments.sh` |
-| **[🔧 Main Installation](install-n8n.sh)** | Install n8n (Native/Docker) | `./install-n8n.sh <domain> <email>` |
-| **[🎛️ n8n Management Menu](n8n-menu.sh)** | All n8n Operations | `./n8n-menu.sh` |
-| **[🔐 Vault Manager](manage-vault.sh)** | Secure Credential Management | `./manage-vault.sh` |
+| **[🌍 Multi-Environment Manager](../scripts/deployment/manage-environments.sh)** | Central Environment Management | `./scripts/deployment/manage-environments.sh` |
+| **[🔧 Main Installation](../scripts/deployment/install-n8n.sh)** | Install n8n (Native/Docker) | `./scripts/deployment/install-n8n.sh <domain> <email>` |
+| **[🎛️ n8n Management Menu](../scripts/management/n8n-menu.sh)** | All n8n Operations | `./scripts/management/n8n-menu.sh` |
+| **[🔐 Vault Manager](../scripts/deployment/ansible/manage-vault.sh)** | Secure Credential Management | `./scripts/deployment/ansible/manage-vault.sh` |
 
 ### 📦 **Workflow Management**
 | Script | Function | Usage |
 |--------|----------|-------|
-| **[📤 Export](export-workflows.sh)** | n8n → Git Export | `./export-workflows.sh <environment>` |
-| **[📥 Import](import-workflows.sh)** | Git → n8n Import | `./import-workflows.sh <env> <server>` |
-| **[🏗️ Development Setup](setup-development.sh)** | Create Dev Environment | `./setup-development.sh <name> <env>` |
+| **[📤 Export](../scripts/workflows/export-workflows.sh)** | n8n → Git Export | `./scripts/workflows/export-workflows.sh <environment>` |
+| **[📥 Import](../scripts/workflows/import-workflows.sh)** | Git → n8n Import | `./scripts/workflows/import-workflows.sh <env> <server>` |
+| **[🏗️ Development Setup](../scripts/deployment/setup-development.sh)** | Create Dev Environment | `./scripts/deployment/setup-development.sh <name> <env>` |
 
 ### ⚙️ **Server & Environment Management**
 | Tool | Purpose | Quick Access |
 |------|---------|-------------|
-| **[📋 Server Configuration](server-config.sh)** | Manage Server Lists | `./server-config.sh list <env>` |
-| **[🐳 Docker Management](manage-docker.sh)** | Container Management | `./manage-docker.sh status` |
-| **[🌐 Domain Management](manage-domains.sh)** | SSL & Domains | SSH: `n8n-domains` |
+| **[📋 Server Configuration](../scripts/deployment/server-config.sh)** | Manage Server Lists | `./scripts/deployment/server-config.sh list <env>` |
+| **[🐳 Docker Management](../scripts/docker/manage-docker.sh)** | Container Management | `./scripts/docker/manage-docker.sh status` |
+| **[🌍 Domain Management](../scripts/deployment/manage-domains.sh)** | SSL & Domains | SSH: `n8n-domains` |
 
 ### 💾 **Backup & Maintenance**
 | Script | Function | SSH Alias |
 |--------|----------|----------|
-| **[💾 Backup](backup-n8n.sh)** | Create n8n Backup | `n8n-backup` |
-| **[🔄 Restore](restore-n8n.sh)** | Restore Backup | `n8n-restore` |
+| **[💾 Backup](../scripts/host/backup-n8n.sh)** | Create n8n Backup | `n8n-backup` |
+| **[🔄 Restore](../scripts/host/restore-n8n.sh)** | Restore Backup | `n8n-restore` |
 | **[🔄 Update](../scripts/host/update-n8n.sh)** | Update n8n | `n8n-update` |
 
 ---
@@ -64,28 +64,28 @@
 ## 📋 Suite Components
 
 ### 🎯 **Core Installation**
-- **[install-n8n.sh](install-n8n.sh)** - Complete n8n installation ([Native](install-n8n.sh#L45) or [Docker](install-n8n.sh#L52))
-- **[setup-ssh-user.sh](setup-ssh-user.sh)** - Configure SSH access for [odoo user](setup-ssh-user.sh#L30)
-- **[setup-reverse-proxy.sh](setup-reverse-proxy.sh)** - [Additional domains](setup-reverse-proxy.sh#L15) with reverse proxy
+- **[install-n8n.sh](../scripts/deployment/install-n8n.sh)** - Complete n8n installation ([Native](../scripts/deployment/install-n8n.sh#L45) or [Docker](../scripts/deployment/install-n8n.sh#L52))
+- **[setup-ssh-user.sh](../scripts/host/setup-ssh-user.sh)** - Configure SSH access for [odoo user](../scripts/host/setup-ssh-user.sh#L30)
+- **[setup-reverse-proxy.sh](../scripts/deployment/setup-reverse-proxy.sh)** - [Additional domains](../scripts/deployment/setup-reverse-proxy.sh#L15) with reverse proxy
 
 ### 🌍 **Multi-Environment System** 
-- **[manage-environments.sh](manage-environments.sh)** - [Central environment management](manage-environments.sh#L25) ([Dev](manage-environments.sh#L40), [Pre-Prod](manage-environments.sh#L45), [Production](manage-environments.sh#L50))
-- **[setup-development.sh](setup-development.sh)** - [Local development environment](setup-development.sh#L35) with Git
-- **[server-config.sh](server-config.sh)** - [Server list configuration](server-config.sh#L15) per environment
-- **[manage-vault.sh](manage-vault.sh)** - [Ansible Vault management](manage-vault.sh#L25) for secure credentials
+- **[manage-environments.sh](../scripts/deployment/manage-environments.sh)** - [Central environment management](../scripts/deployment/manage-environments.sh#L25) ([Dev](../scripts/deployment/manage-environments.sh#L40), [Pre-Prod](../scripts/deployment/manage-environments.sh#L45), [Production](../scripts/deployment/manage-environments.sh#L50))
+- **[setup-development.sh](../scripts/deployment/setup-development.sh)** - [Local development environment](../scripts/deployment/setup-development.sh#L35) with Git
+- **[server-config.sh](../scripts/deployment/server-config.sh)** - [Server list configuration](../scripts/deployment/server-config.sh#L15) per environment
+- **[manage-vault.sh](../scripts/deployment/ansible/manage-vault.sh)** - [Ansible Vault management](../scripts/deployment/ansible/manage-vault.sh#L25) for secure credentials
 
 ### 📦 **Workflow Pipeline**
-- **[export-workflows.sh](export-workflows.sh)** - [n8n → Git export](export-workflows.sh#L40) with [backup option](export-workflows.sh#L65)
-- **[import-workflows.sh](import-workflows.sh)** - [Git → n8n import](import-workflows.sh#L55) via [Ansible](import-workflows.sh#L85)
+- **[export-workflows.sh](../scripts/workflows/export-workflows.sh)** - [n8n → Git export](../scripts/workflows/export-workflows.sh#L40) with [backup option](../scripts/workflows/export-workflows.sh#L65)
+- **[import-workflows.sh](../scripts/workflows/import-workflows.sh)** - [Git → n8n import](../scripts/workflows/import-workflows.sh#L55) via [Ansible](../scripts/workflows/import-workflows.sh#L85)
 
 ### 🎛️ **Management Interface**
-- **[n8n-menu.sh](n8n-menu.sh)** - [Main management menu](n8n-menu.sh#L20) with all options
-- **[manage-domains.sh](manage-domains.sh)** - [Domain management](manage-domains.sh#L30) and [SSL management](manage-domains.sh#L65)
-- **[manage-docker.sh](manage-docker.sh)** - [Docker Compose management](manage-docker.sh#L25) ([Status](manage-docker.sh#L45), [Logs](manage-docker.sh#L75), [Updates](manage-docker.sh#L95))
+- **[n8n-menu.sh](../scripts/management/n8n-menu.sh)** - [Main management menu](../scripts/management/n8n-menu.sh#L20) with all options
+- **[manage-domains.sh](../scripts/deployment/manage-domains.sh)** - [Domain management](../scripts/deployment/manage-domains.sh#L30) and [SSL management](../scripts/deployment/manage-domains.sh#L65)
+- **[manage-docker.sh](../scripts/docker/manage-docker.sh)** - [Docker Compose management](../scripts/docker/manage-docker.sh#L25) ([Status](../scripts/docker/manage-docker.sh#L45), [Logs](../scripts/docker/manage-docker.sh#L75), [Updates](../scripts/docker/manage-docker.sh#L95))
 
 ### 💾 **Backup & Maintenance**
-- **[backup-n8n.sh](backup-n8n.sh)** - [Backup system](backup-n8n.sh#L40) with [encryption key support](backup-n8n.sh#L85)
-- **[restore-n8n.sh](restore-n8n.sh)** - [Restore system](restore-n8n.sh#L50) for [complete recovery](restore-n8n.sh#L95)
+- **[backup-n8n.sh](../scripts/host/backup-n8n.sh)** - [Backup system](../scripts/host/backup-n8n.sh#L40) with [encryption key support](../scripts/host/backup-n8n.sh#L85)
+- **[restore-n8n.sh](../scripts/host/restore-n8n.sh)** - [Restore system](../scripts/host/restore-n8n.sh#L50) for [complete recovery](../scripts/host/restore-n8n.sh#L95)
 - **[update-n8n.sh](../scripts/host/update-n8n.sh)** - [Update management](../scripts/host/update-n8n.sh#L25) for n8n versions
 
 ---
@@ -159,15 +159,15 @@ cd n8n-install
 - **[Webhook support](install-n8n.sh#L260)**
 
 ### 🌍 **Multi-Environment Features** 📍 **[→ Complete Guide](MULTI-ENVIRONMENT.md)**
-- **[Development Environment](setup-development.sh)** - Local Git-based development
-- **[Pre-Production Pipeline](manage-environments.sh#L45)** - Staging & Testing
-- **[Production Deployment](manage-environments.sh#L50)** - Secure live environment
-- **[Ansible Integration](import-workflows.sh#L85)** for automated deployments
-- **[Vault-based credential management](manage-vault.sh)**
+- **[Development Environment](../scripts/deployment/setup-development.sh)** - Local Git-based development
+- **[Pre-Production Pipeline](../scripts/deployment/manage-environments.sh#L45)** - Staging & Testing
+- **[Production Deployment](../scripts/deployment/manage-environments.sh#L50)** - Secure live environment
+- **[Ansible Integration](../scripts/workflows/import-workflows.sh#L85)** for automated deployments
+- **[Vault-based credential management](../scripts/deployment/ansible/manage-vault.sh)**
 
 ---
 
-## 🛠️ SSH Management Setup 📍 **[→ SSH Setup Details](setup-ssh-user.sh)**
+## 🛠️ SSH Management Setup 📍 **[→ SSH Setup Details](../scripts/host/setup-ssh-user.sh)**
 
 ```bash
 # Configure SSH access (automatically called during installation)
@@ -186,8 +186,8 @@ sudo ./setup-ssh-user.sh
 n8n-status      # [Show status](n8n-menu.sh#L45)
 n8n-manage      # [Management menu](n8n-menu.sh#L25)
 n8n-menu        # [Main management menu](n8n-menu.sh#L15)
-n8n-domains     # [Domain management](manage-domains.sh)
-n8n-docker      # [Docker management](manage-docker.sh) (Docker installation only)
+n8n-domains     # [Domain management](../scripts/deployment/manage-domains.sh)
+n8n-docker      # [Docker management](../scripts/docker/manage-docker.sh) (Docker installation only)
 
 # Service Control
 n8n-logs        # [Show live logs](n8n-menu.sh#L85)
@@ -196,13 +196,13 @@ n8n-stop        # [Stop n8n](n8n-menu.sh#L105)
 n8n-restart     # [Restart n8n](n8n-menu.sh#L115)
 
 # Backup & Restore
-n8n-backup      # [Create backup](backup-n8n.sh)
-n8n-restore     # [Restore backup](restore-n8n.sh)
+n8n-backup      # [Create backup](../scripts/host/backup-n8n.sh)
+n8n-restore     # [Restore backup](../scripts/host/restore-n8n.sh)
 
 # Multi-Environment (if setup available)
-n8n-export      # [Export workflows](export-workflows.sh)
-n8n-import      # [Import workflows](import-workflows.sh)
-n8n-vault       # [Vault management](manage-vault.sh)
+n8n-export      # [Export workflows](../scripts/workflows/export-workflows.sh)
+n8n-import      # [Import workflows](../scripts/workflows/import-workflows.sh)
+n8n-vault       # [Vault management](../scripts/deployment/ansible/manage-vault.sh)
 ```
 
 ---
@@ -244,11 +244,11 @@ sudo ./manage-docker.sh update
 ./manage-vault.sh edit production
 ./manage-vault.sh rekey preproduction
 ```
-📍 **[→ Vault Management Guide](manage-vault.sh)**
+📍 **[→ Vault Management Guide](../scripts/deployment/ansible/manage-vault.sh)**
 
 ---
 
-## 🐳 Docker Management 📍 **[→ Docker Management Details](manage-docker.sh)**
+## 🐳 Docker Management 📍 **[→ Docker Management Details](../scripts/docker/manage-docker.sh)**
 
 ### 🎛️ **Docker Management Interface**
 
@@ -316,7 +316,7 @@ sudo systemctl stop n8n
 sudo systemctl restart n8n
 ```
 
-### Docker Installation 📍 **[→ Docker Management](manage-docker.sh)**
+### Docker Installation 📍 **[→ Docker Management](../scripts/docker/manage-docker.sh)**
 ```bash
 # Check status
 sudo ./manage-docker.sh status
@@ -396,21 +396,21 @@ docker-compose -f docker-compose.development.yml up -d
 
 ### 📦 **Workflow Management Pipeline**
 
-#### 📤 **Export: n8n → Git** 📍 **[→ Export Script](export-workflows.sh)**
+#### 📤 **Export: n8n → Git** 📍 **[→ Export Script](../scripts/workflows/export-workflows.sh)**
 ```bash
 # Export workflows from n8n
 ./export-workflows.sh development
 ./export-workflows.sh preproduction staging-01
 ```
 
-#### 📥 **Import: Git → n8n** 📍 **[→ Import Script](import-workflows.sh)**
+#### 📥 **Import: Git → n8n** 📍 **[→ Import Script](../scripts/workflows/import-workflows.sh)**
 ```bash
 # Import workflows to server
 ./import-workflows.sh preproduction staging-01
 ./import-workflows.sh production prod-01 --force
 ```
 
-### 🌐 **Multi-Environment Management** 📍 **[→ Environment Manager](manage-environments.sh)**
+### 🌐 **Multi-Environment Management** 📍 **[→ Environment Manager](../scripts/deployment/manage-environments.sh)**
 
 ```bash
 # Central environment manager
@@ -422,7 +422,7 @@ docker-compose -f docker-compose.development.yml up -d
 # [3] 🏭 Production       - Live environment
 ```
 
-### 📋 **Server Management** 📍 **[→ Server Config](server-config.sh)**
+### 📋 **Server Management** 📍 **[→ Server Config](../scripts/deployment/server-config.sh)**
 
 ```bash
 # Show server lists
@@ -435,7 +435,7 @@ docker-compose -f docker-compose.development.yml up -d
 ./server-config.sh check preproduction  # All servers
 ```
 
-### 🔐 **Secure Credential Management** 📍 **[→ Vault Management](manage-vault.sh)**
+### 🔐 **Secure Credential Management** 📍 **[→ Vault Management](../scripts/deployment/ansible/manage-vault.sh)**
 
 ```bash
 # Start vault manager
@@ -552,16 +552,16 @@ n8n-restore                           # SSH alias
 ### 📋 **Wichtigste Befehle**
 | Zweck | Befehl | Link |
 |-------|--------|------|
-| **Installation** | `sudo ./install-n8n.sh <domain>` | **[→](install-n8n.sh)** |
-| **Multi-Environment** | `./manage-environments.sh` | **[→](manage-environments.sh)** |
-| **Status-Check** | `n8n-status` | **[→](n8n-menu.sh#L45)** |
-| **Logs** | `n8n-logs` | **[→](n8n-menu.sh#L85)** |
-| **Docker-Verwaltung** | `./manage-docker.sh` | **[→](manage-docker.sh)** |
-| **Workflow-Export** | `./export-workflows.sh <env>` | **[→](export-workflows.sh)** |
-| **Workflow-Import** | `./import-workflows.sh <env> <server>` | **[→](import-workflows.sh)** |
-| **Vault-Management** | `./manage-vault.sh` | **[→](manage-vault.sh)** |
-| **Backup** | `n8n-backup` | **[→](backup-n8n.sh)** |
-| **Restore** | `n8n-restore` | **[→](restore-n8n.sh)** |
+| **Installation** | `sudo ./install-n8n.sh <domain>` | **[→](../scripts/deployment/install-n8n.sh)** |
+| **Multi-Environment** | `./manage-environments.sh` | **[→](../scripts/deployment/manage-environments.sh)** |
+| **Status-Check** | `n8n-status` | **[→](../scripts/management/n8n-menu.sh#L45)** |
+| **Logs** | `n8n-logs` | **[→](../scripts/management/n8n-menu.sh#L85)** |
+| **Docker-Verwaltung** | `./manage-docker.sh` | **[→](../scripts/docker/manage-docker.sh)** |
+| **Workflow-Export** | `./export-workflows.sh <env>` | **[→](../scripts/workflows/export-workflows.sh)** |
+| **Workflow-Import** | `./import-workflows.sh <env> <server>` | **[→](../scripts/workflows/import-workflows.sh)** |
+| **Vault-Management** | `./manage-vault.sh` | **[→](../scripts/deployment/ansible/manage-vault.sh)** |
+| **Backup** | `n8n-backup` | **[→](../scripts/host/backup-n8n.sh)** |
+| **Restore** | `n8n-restore` | **[→](../scripts/host/restore-n8n.sh)** |
 
 ### 🌍 **Environment-URLs**
 - **Development**: http://localhost:5678

@@ -10,23 +10,23 @@
 - **Docker Installation**: **[README.md → Docker Management](README.md#-docker-management)**
 
 ### 🛠️ **I want to develop workflows**
-- **Development Environment**: **[setup-development.sh](setup-development.sh)**
+- **Development Environment**: **[setup-development.sh](../scripts/deployment/setup-development.sh)**
 - **Export/Import Workflows**: **[README.md → Workflow Management](README.md#-workflow-development--multi-environment)**
 - **Git-based Workflow**: **[MULTI-ENVIRONMENT.md → Development Workflow](MULTI-ENVIRONMENT.md#workflow-development--deployment)**
 
 ### 🌍 **I want to manage multiple environments**
-- **Environment Manager**: **[manage-environments.sh](manage-environments.sh)**
-- **Server Configuration**: **[server-config.sh](server-config.sh)**
+- **Environment Manager**: **[manage-environments.sh](../scripts/deployment/manage-environments.sh)**
+- **Server Configuration**: **[server-config.sh](../scripts/deployment/server-config.sh)**
 - **Multi-Environment Guide**: **[MULTI-ENVIRONMENT.md](MULTI-ENVIRONMENT.md)**
 
 ### 🔐 **I want to manage credentials securely**
-- **Vault Manager**: **[manage-vault.sh](manage-vault.sh)**
+- **Vault Manager**: **[manage-vault.sh](../scripts/deployment/ansible/manage-vault.sh)**
 - **Security Concept**: **[MULTI-ENVIRONMENT.md → Security Concept](MULTI-ENVIRONMENT.md#security-concept)**
 
 ### 🆘 **I have problems**
 - **Troubleshooting**: **[README.md → Troubleshooting](README.md#-troubleshooting--support)**
 - **Service Problems**: **[README.md → Service Commands](README.md#-service-commands)**
-- **Docker Problems**: **[manage-docker.sh](manage-docker.sh)**
+- **Docker Problems**: **[manage-docker.sh](../scripts/docker/manage-docker.sh)**
 
 ---
 
@@ -35,36 +35,36 @@
 ### 🎯 **Installation & Setup**
 | Script | Purpose | Quick Access | Documentation |
 |--------|---------|-------------|---------------|
-| **[install-n8n.sh](install-n8n.sh)** | Main installation | `sudo ./install-n8n.sh <domain>` | **[→ Guide](README.md#-installation)** |
-| **[setup-ssh-user.sh](setup-ssh-user.sh)** | SSH user setup | Automatic during installation | **[→ SSH Setup](README.md#%EF%B8%8F-ssh-management-setup)** |
-| **[setup-reverse-proxy.sh](setup-reverse-proxy.sh)** | Additional domains | `sudo ./setup-reverse-proxy.sh <domain>` | **[→ Domain Management](manage-domains.sh)** |
-| **[setup-development.sh](setup-development.sh)** | Dev environment | `./setup-development.sh <name> <env>` | **[→ Development Guide](MULTI-ENVIRONMENT.md#local-n8n-development)** |
+| **[install-n8n.sh](../scripts/deployment/install-n8n.sh)** | Main installation | `sudo ./install-n8n.sh <domain>` | **[→ Guide](README.md#-installation)** |
+| **[setup-ssh-user.sh](../scripts/host/setup-ssh-user.sh)** | SSH user setup | Automatic during installation | **[→ SSH Setup](README.md#%EF%B8%8F-ssh-management-setup)** |
+| **[setup-reverse-proxy.sh](../scripts/deployment/setup-reverse-proxy.sh)** | Additional domains | `sudo ./setup-reverse-proxy.sh <domain>` | **[→ Domain Management](../scripts/deployment/manage-domains.sh)** |
+| **[setup-development.sh](../scripts/deployment/setup-development.sh)** | Dev environment | `./setup-development.sh <name> <env>` | **[→ Development Guide](MULTI-ENVIRONMENT.md#local-n8n-development)** |
 
 ### 🌍 **Environment Management**
 | Script | Purpose | Quick Access | Documentation |
 |--------|---------|-------------|---------------|
-| **[manage-environments.sh](manage-environments.sh)** | Multi-environment manager | `./manage-environments.sh` | **[→ Environment Guide](MULTI-ENVIRONMENT.md)** |
-| **[server-config.sh](server-config.sh)** | Manage server lists | `./server-config.sh list <env>` | **[→ Server Management](MULTI-ENVIRONMENT.md#server-management)** |
-| **[manage-vault.sh](manage-vault.sh)** | Credential management | `./manage-vault.sh` | **[→ Vault Guide](MULTI-ENVIRONMENT.md#secure-credential-management)** |
+| **[manage-environments.sh](../scripts/deployment/manage-environments.sh)** | Multi-environment manager | `./manage-environments.sh` | **[→ Environment Guide](MULTI-ENVIRONMENT.md)** |
+| **[server-config.sh](../scripts/deployment/server-config.sh)** | Manage server lists | `./server-config.sh list <env>` | **[→ Server Management](MULTI-ENVIRONMENT.md#server-management)** |
+| **[manage-vault.sh](../scripts/deployment/ansible/manage-vault.sh)** | Credential management | `./manage-vault.sh` | **[→ Vault Guide](MULTI-ENVIRONMENT.md#secure-credential-management)** |
 
 ### 📦 **Workflow Pipeline**
 | Script | Purpose | Quick Access | Documentation |
 |--------|---------|-------------|---------------|
-| **[export-workflows.sh](export-workflows.sh)** | n8n → Git export | `./export-workflows.sh <env>` | **[→ Export Guide](MULTI-ENVIRONMENT.md#export-n8n--git)** |
-| **[import-workflows.sh](import-workflows.sh)** | Git → n8n import | `./import-workflows.sh <env> <server>` | **[→ Import Guide](MULTI-ENVIRONMENT.md#import-git--n8n)** |
+| **[export-workflows.sh](../scripts/workflows/export-workflows.sh)** | n8n → Git export | `./export-workflows.sh <env>` | **[→ Export Guide](MULTI-ENVIRONMENT.md#export-n8n--git)** |
+| **[import-workflows.sh](../scripts/workflows/import-workflows.sh)** | Git → n8n import | `./import-workflows.sh <env> <server>` | **[→ Import Guide](MULTI-ENVIRONMENT.md#import-git--n8n)** |
 
 ### 🎛️ **Management Interface**
 | Script | Purpose | SSH Alias | Documentation |
 |--------|---------|-----------|---------------|
-| **[n8n-menu.sh](n8n-menu.sh)** | Main management menu | `n8n-menu` | **[→ SSH Commands](README.md#%EF%B8%8F-available-ssh-commands)** |
-| **[manage-domains.sh](manage-domains.sh)** | Domain & SSL management | `n8n-domains` | **[→ Domain Management](README.md#%EF%B8%8F-server--environment-management)** |
-| **[manage-docker.sh](manage-docker.sh)** | Docker container management | `n8n-docker` | **[→ Docker Guide](README.md#-docker-management)** |
+| **[n8n-menu.sh](../scripts/management/n8n-menu.sh)** | Main management menu | `n8n-menu` | **[→ SSH Commands](README.md#%EF%B8%8F-available-ssh-commands)** |
+| **[manage-domains.sh](../scripts/deployment/manage-domains.sh)** | Domain & SSL management | `n8n-domains` | **[→ Domain Management](README.md#%EF%B8%8F-server--environment-management)** |
+| **[manage-docker.sh](../scripts/docker/manage-docker.sh)** | Docker container management | `n8n-docker` | **[→ Docker Guide](README.md#-docker-management)** |
 
 ### 💾 **Backup & Maintenance**
 | Script | Purpose | SSH Alias | Documentation |
 |--------|---------|-----------|---------------|
-| **[backup-n8n.sh](backup-n8n.sh)** | Backup system | `n8n-backup` | **[→ Backup Guide](README.md#-backup--maintenance)** |
-| **[restore-n8n.sh](restore-n8n.sh)** | Restore system | `n8n-restore` | **[→ Restore Guide](README.md#-backup--maintenance)** |
+| **[backup-n8n.sh](../scripts/host/backup-n8n.sh)** | Backup system | `n8n-backup` | **[→ Backup Guide](README.md#-backup--maintenance)** |
+| **[restore-n8n.sh](../scripts/host/restore-n8n.sh)** | Restore system | `n8n-restore` | **[→ Restore Guide](README.md#-backup--maintenance)** |
 | **[update-n8n.sh](../scripts/host/update-n8n.sh)** | Update management | `n8n-update` | **[→ Update Guide](README.md#-updates--maintenance)** |
 
 ---
@@ -96,31 +96,31 @@
 ## 🎯 **Quick Starts by Use Case**
 
 ### 🏢 **Enterprise/Team Setup**
-1. **[Start multi-environment manager](manage-environments.sh)**
-2. **[Check server configuration](server-config.sh)**
-3. **[Set up vault for credentials](manage-vault.sh)**
+1. **[Start multi-environment manager](../scripts/deployment/manage-environments.sh)**
+2. **[Check server configuration](../scripts/deployment/server-config.sh)**
+3. **[Set up vault for credentials](../scripts/deployment/ansible/manage-vault.sh)**
 4. **[Production installation](MULTI-ENVIRONMENT.md#production-deployment)**
 
 ### 👨‍💻 **Developer Workflow**
-1. **[Create development environment](setup-development.sh)**
+1. **[Create development environment](../scripts/deployment/setup-development.sh)**
 2. **[Start local n8n](MULTI-ENVIRONMENT.md#start-local-development)**
-3. **[Develop and export workflows](export-workflows.sh)**
-4. **[Deploy to staging](import-workflows.sh)**
+3. **[Develop and export workflows](../scripts/workflows/export-workflows.sh)**
+4. **[Deploy to staging](../scripts/workflows/import-workflows.sh)**
 
 ### 🖥️ **Single Server Setup**
-1. **[Simple installation](install-n8n.sh)**
-2. **[Set up SSH access](setup-ssh-user.sh)**
+1. **[Simple installation](../scripts/deployment/install-n8n.sh)**
+2. **[Set up SSH access](../scripts/host/setup-ssh-user.sh)**
 3. **[Check status via SSH](README.md#%EF%B8%8F-available-ssh-commands)**
 
 ### 🐳 **Docker-only Setup**
-1. **[Choose Docker installation](install-n8n.sh)** (Option 2)
-2. **[Learn Docker management](manage-docker.sh)**
+1. **[Choose Docker installation](../scripts/deployment/install-n8n.sh)** (Option 2)
+2. **[Learn Docker management](../scripts/docker/manage-docker.sh)**
 3. **[Container management](README.md#-docker-management)**
 
 ### 🔧 **Maintenance & Troubleshooting**
-1. **[Use status dashboard](n8n-menu.sh)**
+1. **[Use status dashboard](../scripts/management/n8n-menu.sh)**
 2. **[Analyze logs](README.md#log-analysis)**
-3. **[Backup strategy](backup-n8n.sh)**
+3. **[Backup strategy](../scripts/host/backup-n8n.sh)**
 4. **[Troubleshooting guide](README.md#-troubleshooting--support)**
 
 ---
@@ -128,14 +128,14 @@
 ## 🔍 **Search by Topics**
 
 ### 🔐 **Security**
-- **[Vault Management](manage-vault.sh)** - Secure credentials
-- **[SSH Setup](setup-ssh-user.sh)** - Secure server access
-- **[SSL Certificates](setup-reverse-proxy.sh)** - HTTPS encryption
-- **[Firewall](install-n8n.sh#L200)** - UFW configuration
+- **[Vault Management](../scripts/deployment/ansible/manage-vault.sh)** - Secure credentials
+- **[SSH Setup](../scripts/host/setup-ssh-user.sh)** - Secure server access
+- **[SSL Certificates](../scripts/deployment/setup-reverse-proxy.sh)** - HTTPS encryption
+- **[Firewall](../scripts/deployment/install-n8n.sh#L200)** - UFW configuration
 
 ### 🚀 **Performance**
 - **[Docker vs Native](README.md#%EF%B8%8F-installation-options-during-setup)** - Performance comparison
-- **[System Monitoring](n8n-menu.sh)** - Resource monitoring
+- **[System Monitoring](../scripts/management/n8n-menu.sh)** - Resource monitoring
 - **[Update Management](../scripts/host/update-n8n.sh)** - Performance updates
 
 ### 🔧 **Administration**
@@ -144,9 +144,9 @@
 - **[Backup Strategies](README.md#-backup--maintenance)** - Data backup
 
 ### 🌐 **Network**
-- **[Domain Management](manage-domains.sh)** - DNS & SSL
-- **[Reverse Proxy](setup-reverse-proxy.sh)** - nginx configuration
-- **[Firewall Setup](install-n8n.sh)** - Port configuration
+- **[Domain Management](../scripts/deployment/manage-domains.sh)** - DNS & SSL
+- **[Reverse Proxy](../scripts/deployment/setup-reverse-proxy.sh)** - nginx configuration
+- **[Firewall Setup](../scripts/deployment/install-n8n.sh)** - Port configuration
 
 ---
 
